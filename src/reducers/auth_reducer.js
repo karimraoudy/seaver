@@ -11,6 +11,7 @@ const INITIAL_STATE = {
     language:'fr',
     loading: false,
     error:'',
+    showModal:false,
     uid: null
 }
 export default (state =INITIAL_STATE, action)=>{
@@ -58,7 +59,11 @@ export default (state =INITIAL_STATE, action)=>{
         case 'WEIGHT_CHANGED':
         return {...state, weight: action.weight };
         case ('PROFIL_CREATED'):
-        return INITIAL_STATE
+        return INITIAL_STATE;
+        case ('RESET_PASSWORD'):
+        return {...state, showModal: true, email:''}
+        case ('CLOSE_MODAL'):
+        return INITIAL_STATE;
         default:
         return state;
     }

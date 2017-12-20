@@ -1,10 +1,11 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import {FirstScreen, RegisterPage, LoginPage} from './components';
+import {FirstScreen, RegisterPage, LoginPage, ResetPage} from './components';
 
 const NonAuthoriserNavigation = StackNavigator ({
     firstscreen: {screen : FirstScreen},
     login: {screen: LoginPage},
+    resetPass: {screen: ResetPage},
     register: { screen: RegisterPage}
 },{
     header: null,

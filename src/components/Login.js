@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Text, View, Dimensions, ImageBackground } from 'react-native';
-import {Button , FormInput, FormLabel} from 'react-native-elements';
+import { Text, View, ImageBackground, TouchableOpacity } from 'react-native';
+import {Button , FormInput} from 'react-native-elements';
 import {connect } from 'react-redux';
 import { LoginWithEmail, EmailChanged, PasswordChanged, loginGoogle, loginFacebook} from '../actions';
 import Spinner from './Spinner';
@@ -54,7 +54,7 @@ facebookLogin = () =>{
         underlineColorAndroid={'rgba(0,0,0,0)'}/>
         </View>
         <View style={{flexDirection: 'row',borderBottomColor:'grey',
-        borderBottomWidth:1}}> 
+        borderBottomWidth:1, marginTop:15}}> 
         <View style={{justifyContent:'flex-end',marginRight:10}}><ImageBackground source={require('../../image/icon/Lock.png')} 
         style={{width:32, height:32, padding:0, margin:0}}/></View>
         <FormInput placeholder="PASSWORD" value={this.props.auth.password}
@@ -64,8 +64,12 @@ facebookLogin = () =>{
         containerStyle={styles.containerTextForm}
         underlineColorAndroid={'rgba(0,0,0,0)'}/>
         </View>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resetPass')}
+        style={{alignItems:'flex-end'}}>
+        <Text style={{marginTop: 15, color:'#6F6F6F', fontWeight:'300'}}>FORGOT PASSWORD ?</Text>
+        </TouchableOpacity>
         <View style={{marginTop: 60, justifyContent:'center', alignItems:'center'}}>
-        <Button borderRadius={30} textStyle={{fontSize: 30 }}
+        <Button borderRadius={30} textStyle={{fontSize: 20 }}
         containerViewStyle={{width:170}}
         title="LOGIN" onPress={this.onSubmit}/>
         </View>

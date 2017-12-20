@@ -35,10 +35,10 @@ const ImageHeader = props => (
       }
       {props.menu ==='hammer' ?  
       <Text style={{backgroundColor:'transparent', color:'#6E6E6E', alignSelf:'center', 
-      fontSize: 15,marginLeft:35,fontWeight:'bold'}}>{props.title}</Text>
+      fontSize: 15,marginLeft:'10%',fontWeight:'bold'}}>{props.title}</Text>
       :
       <Text style={{backgroundColor:'transparent', color:'black', alignSelf:'center', 
-      fontSize: 15,marginLeft:35,fontWeight:'bold'}}>{props.title}</Text>
+      fontSize: 15,marginLeft:'7%',fontWeight:'bold', width:80,textAlign:'center'}}>{props.title}</Text>
       }
       
       </ImageBackground>

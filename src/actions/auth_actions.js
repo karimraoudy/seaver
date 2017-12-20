@@ -204,3 +204,18 @@ export const startGoogleLogin = () => {
           }
     }
   };
+export const ResetPassword =(email)=>{
+    return async (dispatch) =>{
+        try{
+            await firebase.auth().sendPasswordResetEmail(email);
+            dispatch({
+                type: 'RESET_PASSWORD'
+               });
+        }catch(e){
+            console.log(e);
+        }
+    }
+};
+export const  CloseModal = () =>({ 
+    type: 'CLOSE_MODAL'
+});
