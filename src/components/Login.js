@@ -30,7 +30,7 @@ facebookLogin = () =>{
       return <View style={{height:'100%'}}><Spinner size="large"/></View>
     }
    return (
-      <View style={{marginTop:60}}>
+      <View style={{marginTop:60, backgroundColor:'#DEDEE0',flex:1}}>
         <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
          <Button icon={{name: 'facebook' , type: 'entypo', size: 40}} containerViewStyle={styles.buttonContainer}
          buttonStyle={styles.buttonFb}   onPress={this.facebookLogin}/>
@@ -71,7 +71,9 @@ facebookLogin = () =>{
         <View style={{marginTop: 60, justifyContent:'center', alignItems:'center'}}>
         <Button borderRadius={30} textStyle={{fontSize: 20 }}
         containerViewStyle={{width:170}}
-        title="LOGIN" onPress={this.onSubmit}/>
+        title="LOGIN"
+        buttonStyle={{backgroundColor:'#757577'}}
+        onPress={this.onSubmit}/>
         </View>
         </View>
         <Text>{this.props.auth.error}</Text>
@@ -94,10 +96,10 @@ const styles = {
   buttonFb:{
     width:150,
     height:45,
-    backgroundColor: '#3b5998',
+    backgroundColor: '#385B9B',
     borderRadius: 10,
     borderWidth: 1, 
-    borderColor:'#3b5998'
+    borderColor:'#385B9B'
   },
   buttonGoogle:{
     width:150,

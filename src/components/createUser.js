@@ -1,16 +1,20 @@
 import React, {Component} from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import {Button , FormInput, FormLabel, ButtonGroup  } from 'react-native-elements';
 import {distanceSelected,burnCalSelected, weightSelected,
    FirstChanged, lastChanged, weightChanged, createProfil} from '../actions';
+import { ImagePicker } from 'expo';
+import {firebase} from '../firebase/firebase';
+import b64 from 'base64-js'
 
 class CreateUser extends Component {
 
   state ={
     indexdist: 0,
     indexburn:0,
-    indexweight:0
+    indexweight:0,
+    image:''
   }
   FirstChanged =(firstName) =>{
     this.props.FirstChanged(firstName)
@@ -33,7 +37,28 @@ class CreateUser extends Component {
     this.setState({indexweight: index});
     this.props.weightSelected(index);
   }
+  ImageSelected = async () =>{
+    let result = await ImagePicker.launchImageLibraryAsync({
+      base64:true,
+      aspect:[3,5],
+      allowsEditing:true
+    });
 
+    
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+      const byteArray = b64.toByteArray(result.base64)
+      const metadata = {contentType: 'image/jpg'};
+      firebase.storage().ref('/images').put(byteArray, metadata).then(snapshot => {
+          console.log("uploaded image!")
+      })
+     
+    }
+  }
+
+
+   
   onSubmit=()=>{
     const { email, firstName, lastName ,weight,
     distanceUnit,
@@ -48,21 +73,30 @@ class CreateUser extends Component {
     return (
       
       <View style={{marginTop:80}}>
-     
+      
       <View style={styles.containerStyle}>
-      <View style={{ marginBottom: 10}}>
+      <View style={{justifyContent:'center', alignItems:'center', margin:15}}>
+      <TouchableOpacity 
+      onPress={this.ImageSelected}
+      style={{borderColor:'#fff', borderWidth:1,width:100, height:100, 
+      borderRadius:50, justifyContent:'center', alignItems:'center'}}>
+      <Image source={this.state.image ? {uri: this.state.image}:require('../../image/icon/Avatar.png')}
+      style={{borderColor:'#fff', borderWidth:1,width:100, height:100, 
+      borderRadius:50}}/>
+      </TouchableOpacity>
+      </View>
+
+      <View style={{ marginBottom: 20}}>
         <FormInput
          placeholder="FIRST NAME"
          value={this.props.auth.firstName}
          onChangeText={this.FirstChanged}
          inputStyle={styles.inputFormStyle}
          containerStyle={styles.containerFormStyle}
-        
-        
         />
       </View>
 
-      <View style={{ marginBottom: 10 }}>
+      <View style={{ marginBottom: 20 }}>
         <FormInput
          placeholder="LAST NAME"
          value={this.props.auth.lastName}
@@ -71,7 +105,8 @@ class CreateUser extends Component {
          containerStyle={styles.containerFormStyle}
          />
       </View>
-      <View style={{ marginBottom: 10 }}>
+
+      <View style={{ marginBottom: 20 }}>
       <FormInput
        placeholder="WEIGHT"
        value={this.props.auth.weight}
@@ -81,6 +116,7 @@ class CreateUser extends Component {
        keyboardType={'numeric'}
        />
     </View>
+
     </View>
     <View style={{borderBottomColor: '#BEC0C0' , marginLeft:35,marginRight:35, borderBottomWidth: 2,}} />
     
@@ -134,8 +170,8 @@ class CreateUser extends Component {
     <Button title="DONE"
     onPress={this.onSubmit} 
     borderRadius={30} textStyle={{fontSize: 20 }}
-    containerViewStyle={{width:200 }}
-    buttonStyle={{ backgroundColor:'#757575'}}/>
+    containerViewStyle={{width:200, marginBottom:10 }}
+    buttonStyle={{backgroundColor:'#757577'}} />
     </View>
       </View>
     );
@@ -148,14 +184,14 @@ const mapStateToProps = (state) =>{
 }
 const styles = {
   containerStyle:{
-    backgroundColor: '#BEC0C0',
+    backgroundColor: '#ACACAE',
     margin:30,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: '#BEC0C0',
+    borderColor: '#ACACAE',
   },
   containerFormStyle:{
-    borderBottomColor:'#D7D8D8',
+    borderBottomColor:'#BEC0C0',
      
   },
   inputFormStyle:{
@@ -164,9 +200,11 @@ const styles = {
     width:'100%'
   },
   labelStyle:{
-    color:'#919191',
+    color:'grey',
     fontSize:10,
-    fontWeight:'400'
+    fontWeight:'400',
+    marginTop:20,
+    marginBottom:10
   },
   bouttonContainerStyle:{
     height: 30,

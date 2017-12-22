@@ -10,7 +10,7 @@ import CreateUser from './createUser';
   }
   render() {
    
-    if(this.props.auth.uid === null){
+    if(!this.props.auth.uid === null){
       return (
         <View>
         <RegisterForm />

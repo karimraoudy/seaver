@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
-import { Text, View, ImageBackground } from 'react-native';
+import { Text, View, ImageBackground,Image } from 'react-native';
 import { Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Home extends Component {
   static navigationOptions= ({ navigation})=>({
-//     title: 'Seaver',
-//     headerLeft: (
-//       <Button 
-          
-//           icon={{ name: 'menu',
-//         color:'black',
-//       size: 35}}
-//           onPress={()=>navigation.navigate('DrawerToggle')}
-//           backgroundColor="rgba(0,0,0,0)"
-//           color="rgba(0,122,255,1)"
-//           />),
-//       headerTitleStyle: {
-//         fontSize: 25,
-//               // marginTop: Platform.OS === 'android' ? 24 : 0
-//        },
+    tabBarIcon:  ({ tintColor }) => (
+      <View style={{borderRightWidth:1, borderRightColor:'#9B9B9D',
+      height:36,
+      width:48,
+      alignItems:'center'}}>
+      <View style={{borderColor:'#9B9B9D',
+      borderWidth:2,
+      borderRadius:18,
+      height:36,
+      width:36,
+      alignItems:'center'
+      }}><Image
+        source={require('../../image/icon/Home_LightGrey.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      /></View></View>
+    ),
+    
     
       drawerLabel: 'START TRAINING',
        drawerIcon: ({ tintColor})=> {
@@ -40,3 +42,9 @@ export default class Home extends Component {
     );
   }
 }
+const styles = {
+  icon: {
+    width: 26,
+    height: 26,
+  }
+};

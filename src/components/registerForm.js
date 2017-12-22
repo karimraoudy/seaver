@@ -77,7 +77,7 @@ import Spinner from './Spinner';
           <Button  borderRadius={25}
           title="REGISTER" onPress={this.onSubmit}
           textStyle={{fontSize: 25 }}
-          buttonStyle={{margin: 20}}
+          buttonStyle={{margin: 20, backgroundColor:'#757577'}}
           containerViewStyle={{marginTop:25}}/> 
           </View>
           <Text>{this.props.auth.error}</Text>
@@ -123,11 +123,11 @@ import Spinner from './Spinner';
       paddingRight:40
     },
     formStyle:{
-      backgroundColor: '#BEC0C0',
+      backgroundColor: '#ACACAE',
       margin: 25,
       borderRadius: 10,
       borderWidth: 1,
-      borderColor: '#BEC0C0',
+      borderColor: '#ACACAE',
       paddingTop: 15,
       paddingLeft:15,
       paddingRight:15
