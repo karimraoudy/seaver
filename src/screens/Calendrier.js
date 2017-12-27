@@ -25,8 +25,8 @@ export default class Calendrier extends Component {
        drawerIcon: ({ tintColor})=> {
               return <Icon 
               name='calendar'
-              color={ 'white'}
-              size={25}
+              color={'#727274'}
+              size={18}
               type='simple-line-icon'
               />;
      } 

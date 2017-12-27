@@ -12,6 +12,7 @@ const INITIAL_STATE = {
     loading: false,
     error:'',
     showModal:false,
+    avatar:'',
     uid: null
 }
 export default (state =INITIAL_STATE, action)=>{
@@ -61,7 +62,7 @@ export default (state =INITIAL_STATE, action)=>{
         case ('PROFIL_CREATED'):
         return INITIAL_STATE;
         case ('RESET_PASSWORD'):
-        return {...state, showModal: true, email:''}
+        return {...state, showModal: true, email:''};
         case ('CLOSE_MODAL'):
         return INITIAL_STATE;
         default:

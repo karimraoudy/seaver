@@ -63,9 +63,14 @@ const CalendrierMenu = StackNavigator({
   
 });
 const SettingsMenu = StackNavigator({
-    settingsmenu : { screen: Settings },
+    settingsmenu : { screen: Settings }
   
-});
+},{
+    navigationOptions:{
+        header: props => <ImageHeader {...props} title="USER SETTINGS" />,
+    }
+}
+);
 const CalibrationsMenu = StackNavigator({
     calibrationmenu : { screen: Calibrations },
   

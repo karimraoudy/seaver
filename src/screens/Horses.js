@@ -25,8 +25,8 @@ export default class Hprses extends Component {
        drawerIcon: ({ tintColor})=> {
               return <Icon 
               name='ios-close-circle-outline'
-              color={ 'white'}
-              size={25}
+              color={'#727274'}
+              size={15}
               type='simple-line-icon'
               />;
      } 

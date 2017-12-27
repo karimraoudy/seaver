@@ -3,18 +3,16 @@ import { Text, View, TouchableOpacity, Image, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import {Button , FormInput, FormLabel, ButtonGroup  } from 'react-native-elements';
 import {distanceSelected,burnCalSelected, weightSelected,
-   FirstChanged, lastChanged, weightChanged, createProfil} from '../actions';
+   FirstChanged, lastChanged, weightChanged, createProfil, setImage} from '../actions';
 import { ImagePicker } from 'expo';
 import {firebase} from '../firebase/firebase';
-import b64 from 'base64-js'
 
 class CreateUser extends Component {
 
   state ={
     indexdist: 0,
     indexburn:0,
-    indexweight:0,
-    image:''
+    indexweight:0
   }
   FirstChanged =(firstName) =>{
     this.props.FirstChanged(firstName)
@@ -37,6 +35,7 @@ class CreateUser extends Component {
     this.setState({indexweight: index});
     this.props.weightSelected(index);
   }
+
   ImageSelected = async () =>{
     let result = await ImagePicker.launchImageLibraryAsync({
       base64:true,
@@ -47,12 +46,8 @@ class CreateUser extends Component {
     
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
-      const byteArray = b64.toByteArray(result.base64)
-      const metadata = {contentType: 'image/jpg'};
-      firebase.storage().ref('/images').put(byteArray, metadata).then(snapshot => {
-          console.log("uploaded image!")
-      })
+      this.props.setImage(result.uri);
+     
      
     }
   }
@@ -80,7 +75,7 @@ class CreateUser extends Component {
       onPress={this.ImageSelected}
       style={{borderColor:'#fff', borderWidth:1,width:100, height:100, 
       borderRadius:50, justifyContent:'center', alignItems:'center'}}>
-      <Image source={this.state.image ? {uri: this.state.image}:require('../../image/icon/Avatar.png')}
+      <Image source={this.props.user.avatar ? {uri: this.props.user.avatar}:require('../../image/icon/Avatar.png')}
       style={{borderColor:'#fff', borderWidth:1,width:100, height:100, 
       borderRadius:50}}/>
       </TouchableOpacity>
@@ -178,8 +173,10 @@ class CreateUser extends Component {
   }
 }
 const mapStateToProps = (state) =>{
+
   return {
-    auth: state.auth
+    auth: state.auth,
+    user: state.user
   }
 }
 const styles = {
@@ -215,4 +212,4 @@ const styles = {
   }
 }
 export default connect(mapStateToProps,{distanceSelected,burnCalSelected, 
-  weightSelected, FirstChanged, lastChanged, weightChanged, createProfil})(CreateUser);
+  weightSelected, FirstChanged, lastChanged, weightChanged, createProfil,setImage})(CreateUser);

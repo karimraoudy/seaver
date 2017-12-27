@@ -19,14 +19,15 @@ const AuthoriserNavigation = DrawerNavigator ({
     contentOptions:{
         activeTintColor:'black',
         iconContainerStyle: {
-            width: 30,
-            height: 30
+            height:28,width:28,
+            borderRadius:14,borderColor:'#fff',borderWidth:1,
+            justifyContent:'center', alignItems:'center',marginRight:0
         },
         // activeBackgroundColor: '#fff',
         labelStyle:{
             fontSize: 10,
             fontWeight: '500',
-            color:'#999999'
+            color:'#727274'
         }
     },
     drawerBackgroundColor: 'rgba(0,0,0,0)'

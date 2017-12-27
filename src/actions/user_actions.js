@@ -53,6 +53,12 @@ export const weightChanged = (weight) => {
         weight
     };
 };
+export const setImage = (image) =>{
+    return {
+        type: 'SET_IMAGE',
+        image
+    };
+};
 export const createProfil = ({ email, firstName, lastName,weight,
     distanceUnit,burnUnit, weightUnit, language }) =>{
     const {currentUser }= firebase.auth();
@@ -63,3 +69,15 @@ export const createProfil = ({ email, firstName, lastName,weight,
             dispatch({ type: 'PROFIL_CREATED'});
     }
 }
+export const userFetch = () =>{
+    const {currentUser }= firebase.auth();
+    return (dispatch) =>{
+        firebase.database()
+        .ref(`/users/${currentUser.uid}/profil`)
+        .on('value', snapshot=>{
+            dispatch({ type: 'USER_FETCH_SUCCESS',
+        payload: snapshot.val() });
+        });
+
+    };
+};
