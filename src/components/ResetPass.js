@@ -39,7 +39,9 @@ class ResetPass extends Component {
             title="RESET PASSWORD" /> 
             </View>
             <ModalBox visible={this.props.auth.showModal}
-            onClick={this.onClick}/>
+            onClick={this.onClick}
+            children='An email Has been sent to you with a link to reset your password'
+            />
 
         </View>
     );

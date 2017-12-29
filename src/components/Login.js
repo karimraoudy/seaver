@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import {Button , FormInput} from 'react-native-elements';
 import {connect } from 'react-redux';
-import { LoginWithEmail, EmailChanged, PasswordChanged, loginGoogle, loginFacebook} from '../actions';
+import ModalBox from './Modal';
+import { LoginWithEmail, EmailChanged, PasswordChanged, loginGoogle, loginFacebook, CloseModal} from '../actions';
 import Spinner from './Spinner';
 
  class Login extends Component {
@@ -20,6 +21,9 @@ googleLogin = () =>{
 }
 facebookLogin = () =>{
   this.props.loginFacebook(this.onSubmitSuccess);
+}
+onClickModal =() =>{
+  this.props.CloseModal();
 }
   onSubmit = () =>{
     const { email ,password} = this.props.auth;
@@ -76,7 +80,11 @@ facebookLogin = () =>{
         onPress={this.onSubmit}/>
         </View>
         </View>
-        <Text>{this.props.auth.error}</Text>
+        <ModalBox visible={this.props.auth.showModal}
+            onClick={this.onClickModal}
+            children={this.props.auth.error}
+            />
+      
       </View>
     );
   }
@@ -131,4 +139,5 @@ const styles = {
      marginLeft:0
   }
 };
-export default connect(mapStateToProps,{LoginWithEmail, EmailChanged, PasswordChanged, loginGoogle, loginFacebook})(Login);
+export default connect(mapStateToProps,{LoginWithEmail, EmailChanged,
+   PasswordChanged, loginGoogle, loginFacebook, CloseModal})(Login);

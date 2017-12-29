@@ -1,6 +1,19 @@
 import {firebase} from '../firebase/firebase';
 import Expo from 'expo';
 
+
+const RegisterSucces = (dispatch,uid) =>{
+        dispatch({
+            type: 'REGISTER_SUCCESS',
+            uid
+        });
+    };
+const RegisterFailed= (error) =>{  
+    return{
+        type: 'REGISTER_FAILED',
+        error: error.message
+    }
+};
 export const registerWithEmail = ({email,password}) => async( dispatch)=>{
     try{
         dispatch({
@@ -10,23 +23,10 @@ export const registerWithEmail = ({email,password}) => async( dispatch)=>{
         let uid = register.uid;
         RegisterSucces(dispatch,uid);
     }catch(e){
-        // console.log(e);
+        
         dispatch(RegisterFailed(e));
     }
     }
-const RegisterSucces = (dispatch,uid) =>{
-        dispatch({
-            type: 'REGISTER_SUCCESS',
-            uid
-        });
-    };
-const RegisterFailed= (error) =>{
-    
-        return{
-            type: 'REGISTER_FAILED',
-            error: error.message
-        }
-    };
 export const LoginWithEmail = ({email,password},onSubmitSuccess) => async( dispatch)=>{
         try{
             dispatch({
@@ -38,7 +38,6 @@ export const LoginWithEmail = ({email,password},onSubmitSuccess) => async( dispa
             LoginSucces(dispatch,uid);
             onSubmitSuccess();
         }catch(e){
-            console.log(e);
             dispatch(LoginFailed(e));
         }
         }
@@ -109,7 +108,7 @@ export const loginGoogle = (onSubmitSuccess) =>{
           }
     
         } catch(e) {
-        console.log('error:'+e);
+            dispatch(LoginFailed(e));
       }
   }
 };
@@ -139,7 +138,7 @@ export const startGoogleLogin = () => {
     
             }
           } catch(e) {
-            console.log('error:'+e);
+            dispatch(LoginFailed(e));
           }
     }
   };
@@ -166,14 +165,14 @@ export const startGoogleLogin = () => {
             onSubmitSuccess();
           }
           else{
-            await firebase.auth().currentUser.delete();
+            // await firebase.auth().currentUser.delete();
             dispatch({
                 type: 'FACEBOOK_LOGIN_DONT_EXIST'
             });
           }
     
         } catch(e) {
-        console.log('error:'+e);
+            dispatch(LoginFailed(e));
       }
   }
 };
@@ -200,7 +199,7 @@ export const startGoogleLogin = () => {
               };
             }
           } catch(e) {
-            console.log('error:'+e);
+            dispatch(LoginFailed(e));
           }
     }
   };
@@ -219,3 +218,12 @@ export const ResetPassword =(email)=>{
 export const  CloseModal = () =>({ 
     type: 'CLOSE_MODAL'
 });
+export const logout = () => ({
+  type: 'LOGOUT'
+});
+export const startLogOut = () =>{
+    return (dispatch) => {
+        return firebase.auth().signOut()
+        dispatch(logout());
+      };
+}

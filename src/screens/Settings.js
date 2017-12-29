@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import {Button } from 'react-native-elements';
 import {connect} from 'react-redux';
+import ModalBox from '../components/Modal';
+import {ResetPassword, CloseModal,startLogOut} from '../actions';
 
 class Settings extends Component {
   static navigationOptions= ({ navigation})=>({
@@ -10,6 +12,16 @@ class Settings extends Component {
      
     
 });
+onClickReset = () =>{
+this.props.ResetPassword(this.props.user.email);
+}
+onClick =() =>{
+  this.props.CloseModal();
+}
+onLogOut = () =>{
+  this.props.startLogOut();
+  this.props.navigation.navigate('firstscreen')
+}
   render() {
     const {firstName, lastName, weight, burnUnit,distanceUnit,
       language, email ,weightUnit} = this.props.user;
@@ -80,7 +92,8 @@ class Settings extends Component {
           <View style={{alignItems:'center', justifyContent:'center'}}>
           <TouchableOpacity style={{flexDirection:'row' ,backgroundColor: '#ACACAE',
           borderRadius:25, borderColor:'#ACACAE', borderWidth:1, alignItems:'center',
-          margin: 20, padding:5, width:240}}> 
+          margin: 20, padding:5, width:240}}
+          onPress={this.onClickReset}> 
                 <Image source={require('../../image/icon/Lock.png')}
                 style={{width:32, height:32, padding:0, marginRight:13, marginLeft:7}} />
                 <Text style={{color:'#fff', fontSize:12}}>CHANGE YOUR PASSWORD</Text>
@@ -94,10 +107,14 @@ class Settings extends Component {
           <Button title='LOG OUT' icon={{ name:'power-off' ,type: 'font-awesome'}}  
           borderRadius={30} textStyle={{fontSize: 20 }}
           containerViewStyle={{margin:20}}
-          buttonStyle={{backgroundColor:'#757577'}}/>
+          buttonStyle={{backgroundColor:'#757577'}}
+          onPress={this.onLogOut}/>
           </View>
         </View>
-
+        <ModalBox visible={this.props.auth.showModal}
+            onClick={this.onClick}
+            children={this.props.auth.error}
+            />
       </ScrollView>
     );
   }
@@ -139,7 +156,8 @@ const styles={
 }
 const mapStateToProps = (state) =>{
   return {
+    auth: state.auth,
     user: state.user
   }
 }
-export default connect(mapStateToProps)(Settings);
+export default connect(mapStateToProps,{ResetPassword,CloseModal,startLogOut})(Settings);

@@ -18,7 +18,7 @@ import CreateUser from './createUser';
        );
     }else{
       return (
-        <ScrollView>
+        <ScrollView style={{marginTop:70}}>
         <CreateUser inscriptionDone={this.inscriptionDone} />
         </ScrollView> 
        );

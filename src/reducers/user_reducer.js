@@ -4,7 +4,9 @@ export default (state = INITIAL_STATE, action) =>{
         case 'USER_FETCH_SUCCESS':
         return action.payload;
         case ('SET_IMAGE'):
-        return {...state, avatar: action.image}
+        return {...state, avatar: action.image};
+        case('LOGOUT'):
+        return INITIAL_STATE;
         default:
         return state;
     }

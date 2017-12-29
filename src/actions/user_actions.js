@@ -28,7 +28,7 @@ export const weightSelected = (index) => {
     if(index === 0) {
          weightUnit = 'Kg';
     }else {
-         weightUnit = 'Pounds';
+         weightUnit = 'Lbs';
     }
     return {
         type: 'SELECTED_WEIGHT',
@@ -58,6 +58,21 @@ export const setImage = (image) =>{
         type: 'SET_IMAGE',
         image
     };
+};
+export const languageChanged = (index) =>{
+        
+        if(index === '1'){
+            return {
+                type: 'LANGUAGE_CHANGED',
+                language: 'ang'
+            }
+        }else{
+            return {
+                type: 'LANGUAGE_CHANGED',
+                language: 'fr'
+            }
+        }
+       
 };
 export const createProfil = ({ email, firstName, lastName,weight,
     distanceUnit,burnUnit, weightUnit, language }) =>{

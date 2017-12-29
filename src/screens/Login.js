@@ -3,6 +3,7 @@ import { Text, View, ImageBackground } from 'react-native';
 import { Button} from 'react-native-elements';
 
 
+
 export default class FirstScreen extends Component {
 
   render() {
@@ -51,4 +52,6 @@ const styles= {
     height: null,
    
   }
-}
+};
+
+

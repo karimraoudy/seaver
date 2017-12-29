@@ -10,6 +10,7 @@ import Settings  from '../screens/Settings';
 import Training from '../screens/Training';
 import Calendrier from '../screens/Calendrier';
 import ImageHeader from '../components/Header';
+import EditUser from '../components/editUser';
 import Test from '../screens/Test';
 
 const HomeMenu = StackNavigator({
@@ -67,10 +68,19 @@ const SettingsMenu = StackNavigator({
   
 },{
     navigationOptions:{
-        header: props => <ImageHeader {...props} title="USER SETTINGS" />,
+        header: props => <ImageHeader {...props} title="USER SETTINGS" showHeaderRight />,
+
     }
 }
 );
+const EditProfilMenu = StackNavigator({
+    editprofil: {screen: EditUser}
+},{
+    navigationOptions:{
+        header: props => <ImageHeader {...props} title="EDIT SETTINGS" />,
+
+    }
+});
 const CalibrationsMenu = StackNavigator({
     calibrationmenu : { screen: Calibrations },
   
@@ -88,4 +98,4 @@ const ReportMenu = StackNavigator({
   
 });
 export  {HomeMenu, TrainingMenu, HorsesMenu, CalendrierMenu,
-SettingsMenu, CalibrationsMenu, FriendsMenu, NotificationsMenu, ReportMenu};
+SettingsMenu, CalibrationsMenu, FriendsMenu, NotificationsMenu, ReportMenu, EditProfilMenu};

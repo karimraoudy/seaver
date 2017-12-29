@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import { Text, View, ScrollView, Image , ImageBackground} from 'react-native';
 import {Button , FormInput, FormLabel } from 'react-native-elements';
 import {connect } from 'react-redux';
+import ModalBox from './Modal';
 import {EmailChanged, PasswordChanged , registerWithEmail ,
-   ConfirmPasswordChanged, PasswordDontMatch, startGoogleLogin, startFacebookLogin} from '../actions';
+   ConfirmPasswordChanged, PasswordDontMatch, startGoogleLogin, startFacebookLogin, CloseModal} from '../actions';
 import Spinner from './Spinner';
  class RegisterForm extends Component {
     onEmailChange =(email) =>{
@@ -22,6 +23,9 @@ import Spinner from './Spinner';
         }else{
           this.props.PasswordDontMatch();
         }
+    }
+    onClickModal =() =>{
+      this.props.CloseModal();
     }
     renderScreen(){
       if(this.props.auth.loading){
@@ -80,7 +84,10 @@ import Spinner from './Spinner';
           buttonStyle={{margin: 20, backgroundColor:'#757577'}}
           containerViewStyle={{marginTop:25}}/> 
           </View>
-          <Text>{this.props.auth.error}</Text>
+          <ModalBox visible={this.props.auth.showModal}
+            onClick={this.onClickModal}
+            children={this.props.auth.error}
+            />
           
         </View>
       );
@@ -145,10 +152,10 @@ import Spinner from './Spinner';
     }
   };
   const mapStateToProps =(state) => {
-    
+    console.log(state.auth.error);
     return {
       auth: state.auth
     }
   };
-  export default  connect(mapStateToProps,{EmailChanged, PasswordChanged ,
-    registerWithEmail,ConfirmPasswordChanged, PasswordDontMatch, startGoogleLogin, startFacebookLogin})(RegisterForm);
+  export default  connect(mapStateToProps,{EmailChanged, PasswordChanged ,registerWithEmail,
+    ConfirmPasswordChanged, PasswordDontMatch, startGoogleLogin, startFacebookLogin, CloseModal})(RegisterForm);

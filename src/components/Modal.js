@@ -1,7 +1,7 @@
 import  React  from 'react';
 import {Text, View, Modal }  from 'react-native';
 import {Button} from 'react-native-elements';
-const ModalBox = ({ visible, onClick }) =>{
+const ModalBox = ({ children,visible, onClick }) =>{
     const {textSectionStyle,TextStyle,containerStyle}= styles;
     return (
         <Modal animationType="slide"
@@ -12,7 +12,7 @@ const ModalBox = ({ visible, onClick }) =>{
         <View style={containerStyle}>
         <View style={{backgroundColor: '#484949', height:'45%'}}>
         <View style={textSectionStyle}>
-        <Text style={TextStyle}>An email Has been sent to you with a link to reset your password</Text>
+        <Text style={TextStyle}>{children}</Text>
         </View>
         <View style={{justifyContent:'center', alignItems:'center'}}>
         <Button onPress={onClick} title="OK" 

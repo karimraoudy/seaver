@@ -40,7 +40,10 @@ const ImageHeader = props => (
       <Text style={{backgroundColor:'transparent', color:'black', alignSelf:'center', 
       fontSize: 15,marginLeft:'7%',fontWeight:'bold', width:80,textAlign:'center'}}>{props.title}</Text>
       }
-      
+      {props.showHeaderRight && <Button title="EDIT" buttonStyle={{backgroundColor:'transparent'}} 
+      containerViewStyle={{position:'absolute' , right:0}}
+      fontSize={20}
+      onPress={()=>props.navigation.navigate('editprofil')}/>}
       </ImageBackground>
   );
   export default ImageHeader;
