@@ -2,9 +2,9 @@ import {firebase } from '../firebase/firebase';
 export const distanceSelected = (index) => {
     let distance = '';
     if(index === 0) {
-         distance = 'MILES';
+         distance = 'Miles';
     }else {
-         distance = 'KILOMETRES';
+         distance = 'Km';
     }
     return {
         type: 'SELECTED_DISTANCE',
@@ -74,6 +74,11 @@ export const languageChanged = (index) =>{
         }
        
 };
+export const beginHorseCreation = ()=>{
+    return {
+        type: 'BEGIN_HORSE_CREATION'
+    }
+};
 export const createProfil = ({ email, firstName, lastName,weight,
     distanceUnit,burnUnit, weightUnit, language }) =>{
     const {currentUser }= firebase.auth();
@@ -96,3 +101,13 @@ export const userFetch = () =>{
 
     };
 };
+export const updateProfile = ({  firstName, lastName,weight,
+    distanceUnit,burnUnit, weightUnit, language }) =>{
+    const {currentUser }= firebase.auth();
+    return async (dispatch) =>{
+        await firebase.database()
+        .ref(`/users/${currentUser.uid}/profil`).update({ firstName, lastName ,weight,
+            distanceUnit,burnUnit, weightUnit, language })
+            dispatch({ type: 'PROFIL_UPDATED'});
+    }
+}

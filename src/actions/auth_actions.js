@@ -218,12 +218,20 @@ export const ResetPassword =(email)=>{
 export const  CloseModal = () =>({ 
     type: 'CLOSE_MODAL'
 });
-export const logout = () => ({
-  type: 'LOGOUT'
+export const  LogOut = () =>({ 
+    type: 'LOGOUT'
 });
+
 export const startLogOut = () =>{
-    return (dispatch) => {
-        return firebase.auth().signOut()
-        dispatch(logout());
+    return async (dispatch) => {
+        try{
+            const {currentUser }= firebase.auth();
+        await firebase.auth().signOut();
+    
+         dispatch({ type: 'BEGIN_LOGOUT'});
+        }catch(e){
+            console.log(e);
+        }
+        
       };
 }

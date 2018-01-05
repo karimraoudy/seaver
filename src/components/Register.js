@@ -28,7 +28,7 @@ import CreateUser from './createUser';
   }
 }
 const mapStateToProps =(state) => {
-  
+  console.log(state);
   return {
     auth: state.auth
   }

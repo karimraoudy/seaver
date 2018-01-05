@@ -26,19 +26,19 @@ export default (state =INITIAL_STATE, action)=>{
         case 'PASSWORD_DONT_MATCH':
         return { ...state , error: 'Mot de passe non identique', showModal: true};
         case('REGISTER_SUCCESS'):
-        return {...state, password:'',confirmPass:'', uid: action.uid, error: '', loading:false };
+        return INITIAL_STATE;
         case ('REGISTER_FAILED'):
         return {...state, error: action.error, showModal: true
         , password:'',confirmPass:'', loading: false};
         case ('BEGIN_LOGIN'):
         return {...state, loading: true}
         case('LOGIN_SUCCESS'):
-        return {...state, password:'', uid: action.uid, error: '', loading:false };
+        return INITIAL_STATE;
         case ('LOGIN_FAILED'):
         return {...state, error: action.error
         , password:'', loading:false, showModal: true};
         case ('GOOGLE_LOGIN_SUCCESS'):
-        return {...state, uid: action.uid, error: '', email: action.email,loading:false};
+        return INITIAL_STATE;
         case ('GOOGLE_LOGIN_DONT_EXIST'):
         return{ ...state, error: 'Please Register', loading:false, showModal: true};
         case ('FACEBOOK_LOGIN_DONT_EXIST'):
@@ -46,7 +46,7 @@ export default (state =INITIAL_STATE, action)=>{
         case ('GOOGLE_LOGIN_FAILED'):
         return{ ...state, error: 'Compte ou  mot de passe  incorrect', loading:false, showModal: true};
         case ('FACEBOOK_LOGIN_SUCCESS'):
-        return {...state, uid: action.uid, error: '', email: action.email, loading:false};
+        return INITIAL_STATE;
         case 'SELECTED_DISTANCE':
         return {...state, distanceUnit: action.distance };
         case 'SELECTED_BURN':
@@ -66,8 +66,6 @@ export default (state =INITIAL_STATE, action)=>{
         case ('RESET_PASSWORD'):
         return {...state, showModal: true, email:'',error:'An email Has been sent to you with a link to reset your password'};
         case ('CLOSE_MODAL'):
-        return INITIAL_STATE;
-        case('LOGOUT'):
         return INITIAL_STATE;
         default:
         return state;

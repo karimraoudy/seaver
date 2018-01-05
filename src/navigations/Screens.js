@@ -10,8 +10,11 @@ import Settings  from '../screens/Settings';
 import Training from '../screens/Training';
 import Calendrier from '../screens/Calendrier';
 import ImageHeader from '../components/Header';
+import HorseHeader from '../components/horseHeader';
 import EditUser from '../components/editUser';
 import Test from '../screens/Test';
+import HorseEdit from '../components/horseEdit';
+import HorseForm from '../components/horseFrom';
 
 const HomeMenu = StackNavigator({
     homemenu : { 
@@ -56,30 +59,51 @@ const TrainingMenu = StackNavigator({
   
 });
 const HorsesMenu = StackNavigator({
-    horsesmenu : { screen: Horses },
-  
+   horses:{screen: StackNavigator({
+        horseslist: {screen:Horses}
+   },{
+    navigationOptions:{
+        header: props => <ImageHeader {...props} title="MY HORSES"  menu="hammer"/>,
+    }
+   })},
+   registerhorse:{ screen: StackNavigator({
+        registerform:{screen:HorseForm}
+   },{
+    navigationOptions:{
+        header: props => <ImageHeader {...props} title="REGISTER HORSE" />,
+    }
+   })},
+   horseedit:{ screen: StackNavigator({
+    edithorse:{screen:HorseEdit}
+},{
+navigationOptions:{
+    header: props => <HorseHeader {...props} title="MY HORSES" showHeaderRight  />,
+}
+})}
+
 });
 const CalendrierMenu = StackNavigator({
     calendriermenu : { screen: Calendrier },
   
 });
 const SettingsMenu = StackNavigator({
-    settingsmenu : { screen: Settings }
+    setting: {screen: StackNavigator({
+        settingsmenu: {screen: Settings}
+    },{
+        navigationOptions:{
+            header: props => <ImageHeader {...props} title="USER SETTINGS" showHeaderRight />,
+    
+        }
+    })},
+    settingsprofil: {screen: StackNavigator({
+        editprofil: {screen: EditUser}
+    },{
+        navigationOptions:{
+            header: props => <ImageHeader {...props} title="EDIT SETTINGS" />,
+    
+        }
+    })}
   
-},{
-    navigationOptions:{
-        header: props => <ImageHeader {...props} title="USER SETTINGS" showHeaderRight />,
-
-    }
-}
-);
-const EditProfilMenu = StackNavigator({
-    editprofil: {screen: EditUser}
-},{
-    navigationOptions:{
-        header: props => <ImageHeader {...props} title="EDIT SETTINGS" />,
-
-    }
 });
 const CalibrationsMenu = StackNavigator({
     calibrationmenu : { screen: Calibrations },
@@ -98,4 +122,4 @@ const ReportMenu = StackNavigator({
   
 });
 export  {HomeMenu, TrainingMenu, HorsesMenu, CalendrierMenu,
-SettingsMenu, CalibrationsMenu, FriendsMenu, NotificationsMenu, ReportMenu, EditProfilMenu};
+SettingsMenu, CalibrationsMenu, FriendsMenu, NotificationsMenu, ReportMenu};

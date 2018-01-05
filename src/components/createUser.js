@@ -13,8 +13,7 @@ class CreateUser extends Component {
   state ={
     indexdist: 0,
     indexburn:0,
-    indexweight:0,
-    lang: 'FR'
+    indexweight:0
   }
   FirstChanged =(firstName) =>{
     this.props.FirstChanged(firstName)
