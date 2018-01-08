@@ -45,7 +45,7 @@ const ImageHeader = props => (
       {props.showHeaderRight && <Button title="EDIT" buttonStyle={{backgroundColor:'transparent'}} 
       containerViewStyle={{position:'absolute' , right:0}}
       fontSize={20}
-      onPress={()=>props.navigation.navigate('registerform')}/>}
+      onPress={()=>props.navigation.navigate('registerhorse')}/>}
       </ImageBackground>
   );
   export default ImageHeader;

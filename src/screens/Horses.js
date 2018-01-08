@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import ListItem from '../components/ListItem';
+import Confirm from '../components/Confirm';
 import { Text, View, TouchableWithoutFeedback, ListView, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { beginHorseCreation, horsesFetch, showHorse } from '../actions';
+import { beginHorseCreation, horsesFetch, showHorse, hideConfirm, horseDelete } from '../actions';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class Horses extends Component {
@@ -24,6 +25,12 @@ class Horses extends Component {
   renderRow(horse) {
     return <ListItem horse={horse} />;
   }
+  onAccept = () =>{
+    this.props.horseDelete(this.props.horse.idTodelete);
+  }
+  onDecline = ()=>{
+    this.props.hideConfirm();
+    }
   static navigationOptions = ({ navigation }) => ({
     drawerLabel: 'HORSES',
     drawerIcon: ({ tintColor }) => {
@@ -52,13 +59,15 @@ class Horses extends Component {
           this.props.navigation.navigate('registerhorse')
         }}>
           <View style={styles.containerCross}>
-          <View style={styles.crossStyle}>
-            <Image source={require('../../image/icon/Cross_Add.png')} style={{height:40, width:40}} />
+            <View style={styles.crossStyle}>
+              <Image source={require('../../image/icon/Cross_Add.png')} style={{ height: 40, width: 40 }} />
             </View>
             <Text style={{ color: 'grey' }}>ADD A HORSE</Text>
           </View>
 
         </TouchableWithoutFeedback>
+        <Confirm visible={this.props.horse.showConfirm} onAccept={this.onAccept} 
+        onDecline={this.onDecline}/>
       </View>
 
     );
@@ -68,14 +77,14 @@ const mapStateToProps = state => {
   const horses = _.map(state.horses, (val, uid) => {
     return { ...val, uid };
   });
-  return { horses };
+  return { horses, horse:state.horse };
 };
 
 const styles = {
   crossStyle: {
     height: 70, width: 70, borderRadius: 35,
     borderWidth: 1, borderColor: '#ACACAE', marginRight: 20
-    ,justifyContent:'center',alignItems:'center'
+    , justifyContent: 'center', alignItems: 'center'
   },
   containerCross: {
     padding: 25,
@@ -88,4 +97,4 @@ const styles = {
     borderBottomWidth: 1
   }
 }
-export default connect(mapStateToProps, { beginHorseCreation, horsesFetch })(Horses);
+export default connect(mapStateToProps, { beginHorseCreation, horsesFetch, hideConfirm, horseDelete })(Horses);

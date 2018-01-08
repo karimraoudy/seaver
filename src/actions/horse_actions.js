@@ -130,3 +130,24 @@ export const horsesFetch = () =>{
 
     };
 };
+export const horseDelete = (id) =>{
+    const {currentUser} =firebase.auth();
+    return async (dispatch) =>{
+        await firebase.database()
+        .ref(`/users/${currentUser.uid}/horses/${id}`).remove();
+        dispatch({ type: 'HIDE_CONFIRM'});
+    }
+};
+export const showConfirm = (idTodelete)=>{
+    return{
+        type:'SHOW_CONFIRM',
+        idTodelete
+        
+    }
+};
+export const hideConfirm = ()=>{
+    return{
+        type:'HIDE_CONFIRM',
+        
+    }
+};

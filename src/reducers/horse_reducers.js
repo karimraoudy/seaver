@@ -1,5 +1,5 @@
 INITIAL_STATE = {horsename:'',birth:'',breed:'', gender:'',familly:'',withers:'',girthFloor:'',heartGirth:'',
-    length:'',shoulderGirth:'',trained:'',isNervous:'',horseid:''}
+    length:'',shoulderGirth:'',trained:'',isNervous:'',horseid:'',showConfirm:false,idTodelete:''}
 export default (state = INITIAL_STATE, action) =>{
     switch(action.type){ 
         case('BEGIN_HORSE_CREATION'):
@@ -31,7 +31,11 @@ export default (state = INITIAL_STATE, action) =>{
         case('HORSE_CREATED'):
         return {...INITIAL_STATE, horseid:action.id};
         case('HORSE_TO_SHOW'):
-        return {...INITIAL_STATE,horseid:action.id}
+        return {...INITIAL_STATE,horseid:action.id};
+        case('SHOW_CONFIRM'):
+        return{...state,showConfirm:true, idTodelete:action.idTodelete};
+        case('HIDE_CONFIRM'):
+        return{...state,showConfirm:false, idTodelete:''};
         case('HORSE_CREATED_FETCH'):
         return {...state,id: action.id ,horsename:action.payload.horsename,birth:action.payload.birth,
             breed:action.payload.breed, gender:action.payload.gender,familly:action.payload.familly,

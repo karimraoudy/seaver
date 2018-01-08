@@ -6,10 +6,13 @@ import { horseCreatedFetch } from '../actions';
 
 class HorseEdit extends Component {
   componentDidUpdate() {
-    this.props.horse.horseid && this.props.horseCreatedFetch({ id: this.props.horse.horseid })
+    this.props.horse.horseid && this.props.horseCreatedFetch({ id: this.props.horse.horseid });
+    
 
   }
-
+  componentWillMount(){
+    this.props.horse.horseid && this.props.horseCreatedFetch({ id: this.props.horse.horseid });
+  }
   render() {
     const { horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
       length, shoulderGirth, trained, isNervous, } = this.props.horse;
@@ -64,7 +67,7 @@ class HorseEdit extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state.horse)
+  
   return {
     horse: state.horse
   }

@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View, Image } from 'react-native';
-export default class ListItem extends Component {
+import {connect } from 'react-redux';
+import {NavigationActions} from 'react-navigation';
+import {showHorse, showConfirm} from '../actions';
+class ListItem extends Component {
     onRowPress = () => {
-        console.log(this.props.horse)
         
+        this.props.showHorse(this.props.horse.uid);
+         this.props.navigateTo();
+         
+    }
+    onLongPress = () =>{
+        this.props.showConfirm(this.props.horse.uid);
     }
 
     render() {
         const { horsename } = this.props.horse
         return (
             <TouchableWithoutFeedback
-                onPress={this.onRowPress}>
+                onPress={this.onRowPress}
+                onLongPress={this.onLongPress}>
+                
                 <View style={styles.containerStyle}>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
                         <Image source={require('../../image/icon/Avatar_Horse.png')}
@@ -45,3 +55,15 @@ const styles = {
         borderTopWidth:1
     }
 };
+mapStateToProps = (state) =>{
+    return {
+        nav:state.nav
+    }
+};
+const mapDispatchToProps = (dispatch, props) => ({
+    navigateTo: () => dispatch(NavigationActions.navigate({ routeName: 'horseedit' })),
+    showHorse: (id)=>dispatch(showHorse(id)),
+    showConfirm: (idTodelete)=>dispatch(showConfirm(idTodelete))
+    
+  });
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
