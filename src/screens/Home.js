@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import { Text, View, ImageBackground,Image } from 'react-native';
+import { Text, View, ImageBackground,Image, TouchableWithoutFeedback } from 'react-native';
 import { Button} from 'react-native-elements';
+import ImageHeader from '../components/Header';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {connect} from 'react-redux';
-import {userFetch} from '../actions';
+import {userFetch, showSelectHorse,hideSelectHorse} from '../actions';
 
 class Home extends Component {
-  static navigationOptions= ({ navigation})=>({
+  static navigationOptions= ({ navigation})=>{
+    const { params = {} } = navigation.state;
+    return{
+    header: props => <ImageHeader {...props} title="S E A V E R" menu="hammer" 
+    selectHorse={()=>params.onClickIn()}/>,
     tabBarIcon:  ({ tintColor }) => (
       <View style={{borderRightWidth:1, borderRightColor:'#9B9B9D',
       height:36,
@@ -36,15 +41,27 @@ class Home extends Component {
               />;
      } 
     
-});
+}};
+onClickIn = ()=>{
+this.props.showSelectHorse();
+}
+onClickOut = () =>{
+this.props.hideSelectHorse();
+}
+componentDidMount () {
+  this.props.navigation.setParams({ onClickIn: this.onClickIn })
+}
 componentWillMount(){
   this.props.userFetch();
 }
   render() {
     return (
-      <View style={{marginTop:60}}>
-        <ImageBackground source={require('../../image/dashboard.jpg')} style={{ width:'100%',height:'100%'}}/>
+      <TouchableWithoutFeedback onPress={this.onClickOut}>
+      <View style={{marginTop:60,width:'100%',height:'100%'}}>
+        {this.props.user.showSelectHorse && <View><Text>List of horses</Text></View>}
+        <Text>New Training</Text>
       </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -59,4 +76,4 @@ const mapStateToProps = (state) =>{
     user : state.user
   }
 }
-export default connect(mapStateToProps, {userFetch})(Home);
+export default connect(mapStateToProps, {userFetch,showSelectHorse,hideSelectHorse})(Home);

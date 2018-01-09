@@ -6,9 +6,40 @@ import { Text, View, TouchableWithoutFeedback, ListView, Image } from 'react-nat
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { beginHorseCreation, horsesFetch, showHorse, hideConfirm, horseDelete } from '../actions';
+import ImageHeader from '../components/Header';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class Horses extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    header: props => <ImageHeader {...props} title="MY HORSES" menu="hammer" selectHorse={()=>{}} />,
+    tabBarIcon:  ({ tintColor }) => (
+     
+      <View style={{borderColor:'#9B9B9D',
+      borderWidth:2,
+      borderRadius:18,
+      height:36,
+      width:36,
+      alignItems:'center',
+      marginLeft:40
+      }}><Image
+        source={require('../../image/icon/Home_LightGrey.png')}
+        style={{tintColor: tintColor, height:26,width:26}}
+      /></View>
+    ),
+    tabBarOnPress: (scene, jumpToIndex) => {
+      navigation.navigate('home')
+      },
+    drawerLabel: 'HORSES',
+    drawerIcon: ({ tintColor }) => {
+      return <Icon
+        name='ios-close-circle-outline'
+        color={'#727274'}
+        size={15}
+        type='simple-line-icon'
+      />;
+    }
+
+  });
   componentWillMount() {
     this.props.horsesFetch();
     this.createDataSource(this.props);
@@ -31,18 +62,7 @@ class Horses extends Component {
   onDecline = ()=>{
     this.props.hideConfirm();
     }
-  static navigationOptions = ({ navigation }) => ({
-    drawerLabel: 'HORSES',
-    drawerIcon: ({ tintColor }) => {
-      return <Icon
-        name='ios-close-circle-outline'
-        color={'#727274'}
-        size={15}
-        type='simple-line-icon'
-      />;
-    }
-
-  });
+  
   render() {
     return (
       <View style={{ marginTop: 90 }}>

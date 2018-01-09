@@ -7,6 +7,23 @@ import {ResetPassword, CloseModal,startLogOut} from '../actions';
 
 class Settings extends Component {
   static navigationOptions= ({ navigation})=>({
+    tabBarIcon:  ({ tintColor }) => (
+     
+      <View style={{borderColor:'#9B9B9D',
+      borderWidth:2,
+      borderRadius:18,
+      height:36,
+      width:36,
+      alignItems:'center',
+      marginLeft:40
+      }}><Image
+        source={require('../../image/icon/Home_LightGrey.png')}
+        style={{tintColor: tintColor, height:26,width:26}}
+      /></View>
+    ),
+    tabBarOnPress: (scene, jumpToIndex) => {
+      navigation.navigate('home')
+      },
   
       drawerLabel: '-SETTINGS',
      
