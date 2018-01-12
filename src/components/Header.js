@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button } from 'react-native-elements';
 import { View, Text, ImageBackground, Image, TouchableWithoutFeedback } from 'react-native';
+import {connect}  from 'react-redux';
 
 
 const ImageHeader = props => (
-
+  
   <ImageBackground
     style={{
       width: '100%', height: 50, position: 'absolute', top: 0, left: 0, marginTop: 16, flexDirection: 'row'
@@ -61,13 +62,20 @@ const ImageHeader = props => (
       onPress={() => props.navigation.navigate('settingsprofil')} />}
     {(props.title === 'S E A V E R' || props.title === 'MY HORSES') &&
       <TouchableWithoutFeedback onPress={props.selectHorse}>
+      
         <View style={{ flexDirection: 'row', alignItems: 'center', width: '45%', justifyContent: 'flex-end' }}>
           <Text style={{ backgroundColor: 'transparent', color: '#fff' }}>
-            horsename</Text><Image source={require('../../image/icon/arrow2.png')}
+            {
+              props.horse.horseSelectedName ?props.horse.horseSelectedName:'' 
+            }</Text><Image source={require('../../image/icon/arrow2.png')}
               style={{ height: 26, width: 26, marginLeft: 5, marginRight: 0 }} />
         </View>
       </TouchableWithoutFeedback>
     }
   </ImageBackground>
 );
-export default ImageHeader;
+const mapStateToProps = state => {
+  return { 
+     horse: state.horse };
+};
+export default connect(mapStateToProps)(ImageHeader);

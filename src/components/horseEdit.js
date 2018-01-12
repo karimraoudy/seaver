@@ -40,7 +40,7 @@ class HorseEdit extends Component {
     const { horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
       length, shoulderGirth, trained, isNervous, } = this.props.horse;
     return (
-      <ScrollView style={{ marginTop: 70 }}>
+      <ScrollView style={{ marginTop: 60 }}>
         <View style={styles.firstContainer}>
           <View style={{ position: 'relative', left: 60, justifyContent: 'center' }}>
             <View style={styles.nameStyle} >

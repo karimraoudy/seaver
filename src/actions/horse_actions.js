@@ -160,3 +160,21 @@ export const hideConfirm = () => {
 
     }
 };
+export const  selectedHorse = () =>{
+        const { currentUser } = firebase.auth();
+      
+        return (dispatch) => {
+            firebase.database()
+                .ref(`/users/${currentUser.uid}/profil`)
+                .on('value', snapshot => {
+                    dispatch({
+                        type: 'HORSE_SELECTED_NAME',
+                        payload: snapshot.val().horseSelectedName
+                    });
+                });
+    
+        };
+      
+    }
+    
+    

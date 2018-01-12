@@ -127,3 +127,18 @@ export const hideSelectHorse = () => {
         type: 'HIDE_SELECT_HORSE'
     }
 };
+export const selectHorse = ({id, name}) => {
+    
+    const { currentUser } = firebase.auth();
+    return async (dispatch) => {
+        await firebase.database()
+            .ref(`/users/${currentUser.uid}/profil`).update({
+                horseSelected:id,
+                horseSelectedName:name
+
+
+
+            })
+        dispatch({ type: 'HORSE_SELECTED' });
+    }
+}

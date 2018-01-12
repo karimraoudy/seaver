@@ -1,5 +1,6 @@
 INITIAL_STATE = {horsename:'',birth:'',breed:'', gender:'',familly:'',withers:'',girthFloor:'',heartGirth:'',
-    length:'',shoulderGirth:'',trained:'',isNervous:'',horseid:'',showConfirm:false,idTodelete:''}
+    length:'',shoulderGirth:'',trained:'',isNervous:'',horseid:''
+    ,showConfirm:false,idTodelete:'',showSelectHorse:false, horseSelectedName:''}
 export default (state = INITIAL_STATE, action) =>{
     switch(action.type){ 
         case('BEGIN_HORSE_CREATION'):
@@ -32,10 +33,21 @@ export default (state = INITIAL_STATE, action) =>{
         return {...INITIAL_STATE, horseid:action.id};
         case('HORSE_TO_SHOW'):
         return {...INITIAL_STATE,horseid:action.id};
+        case('HORSE_SELECTED_NAME'):
+        return {...state,horseSelectedName:action.payload};
         case('SHOW_CONFIRM'):
         return{...state,showConfirm:true, idTodelete:action.idTodelete};
         case('HIDE_CONFIRM'):
         return{...state,showConfirm:false, idTodelete:''};
+        case('HORSE_SELECTED'):
+        return {...state,showSelectHorse:false}
+        case ('SHOW_SELECT_HORSE'):
+        if(state.showSelectHorse){
+            return {...state,showSelectHorse:false};
+        }
+        return {...state,showSelectHorse:true};
+        case ('HIDE_SELECT_HORSE'):
+        return {...state,showSelectHorse:false};
         case('HORSE_CREATED_FETCH'):
         return {...state,id: action.id ,horsename:action.payload.horsename,birth:action.payload.birth,
             breed:action.payload.breed, gender:action.payload.gender,familly:action.payload.familly,

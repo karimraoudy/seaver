@@ -19,10 +19,6 @@ export default (state = INITIAL_STATE, action) =>{
         return {...state, weight: action.weight };
         case 'LANGUAGE_CHANGED' :
         return {...state, language: action.language };
-        case ('SHOW_SELECT_HORSE'):
-        return {...state,showSelectHorse:true};
-        case ('HIDE_SELECT_HORSE'):
-        return {...state,showSelectHorse:false};
         case('BEGIN_LOGOUT'):
         return INITIAL_STATE;
         default:
