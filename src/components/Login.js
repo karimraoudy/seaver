@@ -66,6 +66,7 @@ class Login extends Component {
             <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../image/icon/Lock.png')}
               style={{ width: 32, height: 32, padding: 0, margin: 0 }} /></View>
             <FormInput placeholder="PASSWORD" value={this.props.auth.password}
+            secureTextEntry
               onChangeText={this.onPasswordChange}
               inputStyle={styles.textFormStyle}
               placeholderTextColor={'#C5C7C7'}
