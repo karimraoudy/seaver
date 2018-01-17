@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, ImageBackground, Image, TouchableWithoutFeedback, ListView } from 'react-native';
 import { Button } from 'react-native-elements';
-import ImageHeader from '../components/Header';
+import ImageHeader from '../components/settings/Header';
 import _ from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
-import SelectHorse from '../components/selectHorse';
+import SelectHorse from '../components/horse/selectHorse';
 import { userFetch, horsesFetch, showSelectHorse, hideSelectHorse, selectedHorse } from '../actions';
 
 class Home extends Component {

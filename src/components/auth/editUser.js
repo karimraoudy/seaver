@@ -6,7 +6,7 @@ import { FormInput, FormLabel, ButtonGroup, Button } from 'react-native-elements
 import {
   updateProfile, distanceSelected, burnCalSelected, weightSelected,
   FirstChanged, lastChanged, weightChanged, languageChanged
-} from '../actions';
+} from '../../actions';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 class EditUser extends Component {
@@ -77,7 +77,7 @@ class EditUser extends Component {
           <View style={styles.infoTitle}>
             <Text style={styles.textStyle}>PERSONNAL INFORMATIONS</Text>
             <TouchableOpacity onPress={this.hideShow1}>
-              <Image source={require('../../image/icon/Arrow_1.png')}
+              <Image source={require('../../../image/icon/Arrow_1.png')}
                 style={{ height: 16, width: 16 }} />
             </TouchableOpacity>
           </View>
@@ -90,7 +90,7 @@ class EditUser extends Component {
                     borderColor: '#fff', borderWidth: 1, width: 100, height: 100,
                     borderRadius: 50, justifyContent: 'center', alignItems: 'center'
                   }}>
-                  <Image source={this.props.user.avatar ? { uri: this.props.user.avatar } : require('../../image/icon/Avatar.png')}
+                  <Image source={this.props.user.avatar ? { uri: this.props.user.avatar } : require('../../../image/icon/Avatar.png')}
                     style={{
                       borderColor: '#fff', borderWidth: 1, width: 100, height: 100,
                       borderRadius: 50
@@ -130,7 +130,7 @@ class EditUser extends Component {
           <View style={styles.infoTitle}>
             <Text style={styles.textStyle}>LANGUAGE </Text>
             <TouchableOpacity onPress={this.hideShow2}>
-              <Image source={require('../../image/icon/Arrow_1.png')}
+              <Image source={require('../../../image/icon/Arrow_1.png')}
                 style={{ height: 16, width: 16 }} />
             </TouchableOpacity>
           </View>
@@ -144,8 +144,8 @@ class EditUser extends Component {
               }}>
                 <Text style={[styles.textStyle, { fontSize: 16 }]}>LANGUAGE</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={this.props.user.language === 'fr' ? require('../../image/icon/fr.png') :
-                    require('../../image/icon/ang.png')}
+                  <Image source={this.props.user.language === 'fr' ? require('../../../image/icon/fr.png') :
+                    require('../../../image/icon/ang.png')}
                     style={{
                       height: 36, width: 36, marginRight: 20, marginLeft: 27, borderRadius: 18
                       , borderWidth: 1, borderColor: '#fff'
@@ -158,7 +158,7 @@ class EditUser extends Component {
                       height: 30, width: 30, borderRadius: 15,
                       borderWidth: 1, borderColor: '#969698', alignItems: 'center', justifyContent: 'center'
                     }}>
-                      <Image source={require('../../image/icon/Arrow_1.png')}
+                      <Image source={require('../../../image/icon/Arrow_1.png')}
                         style={{ height: 16, width: 16 }} />
                     </View>
                   </ModalDropdown>
@@ -171,7 +171,7 @@ class EditUser extends Component {
           <View style={styles.infoTitle}>
             <Text style={styles.textStyle}>UNITS</Text>
             <TouchableOpacity onPress={this.hideShow3}>
-              <Image source={require('../../image/icon/Arrow_1.png')}
+              <Image source={require('../../../image/icon/Arrow_1.png')}
                 style={{ height: 16, width: 16 }} />
             </TouchableOpacity>
           </View>

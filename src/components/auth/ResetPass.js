@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, ImageBackground } from 'react-native';
 import { Button, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { ResetPassword, EmailChanged, CloseModal } from '../actions/index';
-import ModalBox from './Modal';
+import { ResetPassword, EmailChanged, CloseModal } from '../../actions/index';
+import ModalBox from '../settings/Modal';
 
 class ResetPass extends Component {
     onEmailChange = (email) => {
@@ -24,7 +24,7 @@ class ResetPass extends Component {
                     flexDirection: 'row', borderBottomColor: 'grey',
                     borderBottomWidth: 1, padding: 0, margin: 50
                 }}>
-                    <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../image/icon/Mail.png')}
+                    <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../../image/icon/Mail.png')}
                         style={{ width: 32, height: 32, padding: 0, margin: 0 }} /></View>
                     <FormInput placeholder="EMAIL"
                         value={this.props.auth.email}

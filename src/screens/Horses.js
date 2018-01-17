@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import ListItem from '../components/ListItem';
-import Confirm from '../components/Confirm';
+import ListItem from '../components/horse/ListItem';
+import Confirm from '../components/settings/Confirm';
 import { Text, View, TouchableWithoutFeedback, ListView, Image, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import SelectHorse from '../components/selectHorse';
+import SelectHorse from '../components/horse/selectHorse';
 import {
   beginHorseCreation, horsesFetch, showHorse, hideConfirm, horseDelete,
   showSelectHorse, hideSelectHorse
 } from '../actions';
-import ImageHeader from '../components/Header';
+import ImageHeader from '../components/settings/Header';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class Horses extends Component {

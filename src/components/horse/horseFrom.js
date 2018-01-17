@@ -6,7 +6,7 @@ import {
   nameChanged, yearChanged, breedChanged, genderChanged, famillyChanged,
   withersChanged, girthFloorChanged, heartGirthChanged, lengthChanged, shoulderGirthChanged,
   trainedChanged, isNervousChanged, horseCreate, updateHorse
-} from '../actions';
+} from '../../actions';
 
 class HorseForm extends Component {
   state = {
@@ -72,7 +72,7 @@ class HorseForm extends Component {
           <View style={{ justifyContent: 'center', alignItems: 'center', margin: 15 }}>
             <TouchableOpacity
               style={styles.avatarStyle}>
-              <Image source={require('../../image/icon/Avatar_Horse.png')}
+              <Image source={require('../../../image/icon/Avatar_Horse.png')}
                 style={{
                   borderColor: '#fff', borderWidth: 1, width: 100, height: 100,
                   borderRadius: 50

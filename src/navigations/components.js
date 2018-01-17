@@ -1,11 +1,11 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import Register from '../components/Register';
+import Register from '../components/auth/Register';
 import First from '../screens/Login';
-import Login from '../components/Login';
-import CreateUser from '../components/createUser';
-import ResetPass from '../components/ResetPass';
-import ImageHeader from '../components/Header';
+import Login from '../components/auth/Login';
+import CreateUser from '../components/auth/createUser';
+import ResetPass from '../components/auth/ResetPass';
+import ImageHeader from '../components/settings/Header';
 
 const FirstScreen = StackNavigator({
     firstscreen: { screen: First },

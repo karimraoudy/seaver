@@ -12,7 +12,7 @@ class DrawerContent extends Component {
                 <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
                     <View style={styles.container}>
                         <View style={styles.profile}>
-                            <Image source={this.props.user.avatar ? { uri: this.props.user.avatar } : require('../../image/compte-utilisateur.png')}
+                            <Image source={this.props.user.avatar ? { uri: this.props.user.avatar } : require('../../../image/compte-utilisateur.png')}
                                 style={styles.avatar} />
                             <View>
                                 <Text style={styles.name}>{this.props.user.firstName}</Text>

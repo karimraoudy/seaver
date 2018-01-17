@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import { selectHorse } from '../actions';
+import { selectHorse } from '../../actions';
 class SelectHorse extends Component {
     onRowPress = () => {
         this.props.selectHorse({id:this.props.horse.uid,name:this.props.horse.horsename});
@@ -27,7 +27,7 @@ class SelectHorse extends Component {
                         </Text>
                     
                     <Image source={uid === this.props.user.horseSelected? 
-                        require('../../image/icon/Calibrate.png'): require('../../image/icon/Horse_Grey2.png')}
+                        require('../../../image/icon/Calibrate.png'): require('../../../image/icon/Horse_Grey2.png')}
                         style={uid === this.props.user.horseSelected?
                             { height: 69, width: 50 }:{ height: 50, width: 50 }} />
                 </View>

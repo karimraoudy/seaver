@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import Home from '../screens/Home';
 import Calibrations from '../screens/Calibrations';
@@ -9,12 +9,12 @@ import Report from '../screens/Report';
 import Settings from '../screens/Settings';
 import Training from '../screens/Training';
 import Calendrier from '../screens/Calendrier';
-import ImageHeader from '../components/Header';
-import HorseHeader from '../components/horseHeader';
-import EditUser from '../components/editUser';
+import ImageHeader from '../components/settings/Header';
+import HorseHeader from '../components/settings/horseHeader';
+import EditUser from '../components/auth/editUser';
 import Test from '../screens/Test';
-import HorseEdit from '../components/horseEdit';
-import HorseForm from '../components/horseFrom';
+import HorseEdit from '../components/horse/horseEdit';
+import HorseForm from '../components/horse/horseFrom';
 
 const HomeMenu = StackNavigator({
     homemenu: {

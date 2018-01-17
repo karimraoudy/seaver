@@ -2,7 +2,7 @@ import React from 'react';
 import { DrawerNavigator } from 'react-navigation';
 import {HomeMenu, TrainingMenu, HorsesMenu, CalendrierMenu,
     SettingsMenu, CalibrationsMenu, FriendsMenu, NotificationsMenu, ReportMenu} from './Screens';
-import DrawerContent from '../components/DrawerContent';
+import DrawerContent from '../components/settings/DrawerContent';
 
 const AuthoriserNavigation = DrawerNavigator ({
     home: {screen: HomeMenu },

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import { Button, FormInput } from 'react-native-elements';
 import { connect } from 'react-redux';
-import ModalBox from './Modal';
-import { LoginWithEmail, EmailChanged, PasswordChanged, loginGoogle, loginFacebook, CloseModal } from '../actions';
-import Spinner from './Spinner';
+import ModalBox from '../settings/Modal';
+import { LoginWithEmail, EmailChanged, PasswordChanged, loginGoogle, loginFacebook, CloseModal } from '../../actions';
+import Spinner from '../settings/Spinner';
 
 class Login extends Component {
   onEmailChange = (email) => {
@@ -50,7 +50,7 @@ class Login extends Component {
             flexDirection: 'row', borderBottomColor: 'grey',
             borderBottomWidth: 1, padding: 0
           }}>
-            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../image/icon/Mail.png')}
+            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../../image/icon/Mail.png')}
               style={{ width: 32, height: 32, padding: 0, margin: 0 }} /></View>
             <FormInput placeholder="EMAIL" value={this.props.auth.email}
               onChangeText={this.onEmailChange}
@@ -63,7 +63,7 @@ class Login extends Component {
             flexDirection: 'row', borderBottomColor: 'grey',
             borderBottomWidth: 1, marginTop: 15
           }}>
-            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../image/icon/Lock.png')}
+            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../../image/icon/Lock.png')}
               style={{ width: 32, height: 32, padding: 0, margin: 0 }} /></View>
             <FormInput placeholder="PASSWORD" value={this.props.auth.password}
             secureTextEntry

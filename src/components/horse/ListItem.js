@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import { showHorse, showConfirm } from '../actions';
+import { showHorse, showConfirm } from '../../actions';
 class ListItem extends Component {
     onRowPress = () => {
 
@@ -23,13 +23,13 @@ class ListItem extends Component {
 
                 <View style={styles.containerStyle}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Image source={require('../../image/icon/Avatar_Horse.png')}
+                        <Image source={require('../../../image/icon/Avatar_Horse.png')}
                             style={styles.avatarStyle} />
                         <Text style={styles.titleStyle}>
                             {horsename}
                         </Text>
                     </View>
-                    <Image source={require('../../image/icon/Horse_Grey3.png')}
+                    <Image source={require('../../../image/icon/Horse_Grey3.png')}
                         style={{ height: 70, width: 70 }} />
                 </View>
             </TouchableWithoutFeedback>

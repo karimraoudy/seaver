@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { horseCreatedFetch } from '../actions';
+import { horseCreatedFetch } from '../../actions';
 
 class HorseEdit extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -20,7 +20,7 @@ class HorseEdit extends Component {
       alignItems:'center',
       
       }}><Image
-        source={require('../../image/icon/Home_LightGrey.png')}
+        source={require('../../../image/icon/Home_LightGrey.png')}
         style={{tintColor: tintColor, height:26,width:26}}
       /></View></View>
     ),
@@ -55,7 +55,7 @@ class HorseEdit extends Component {
             </View>
 
           </View>
-          <Image source={require('../../image/icon/Avatar_Horse.png')}
+          <Image source={require('../../../image/icon/Avatar_Horse.png')}
             style={{ height: 118, width: 118, borderRadius: 59, borderWidth: 1, borderColor: '#ACACAE', backgroundColor: '#ACACAE' }} />
         </View>
 
@@ -68,19 +68,19 @@ class HorseEdit extends Component {
         <View style={styles.containerThree}>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
             <View style={styles.circleStyle}>
-              <Image source={require('../../image/icon/Cake.png')} style={{ height: 30, width: 30 }} />
+              <Image source={require('../../../image/icon/Cake.png')} style={{ height: 30, width: 30 }} />
             </View>
             <Text>{birth}</Text>
           </View>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
             <View style={styles.circleStyle}>
-              <Image source={require('../../image/icon/Horse_Info_Height.png')} style={{ height: 60, width: 60 }} />
+              <Image source={require('../../../image/icon/Horse_Info_Height.png')} style={{ height: 60, width: 60 }} />
             </View>
             <Text>{withers}</Text>
           </View>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
             <View style={styles.circleStyle}>
-              <Image source={require('../../image/icon/Horse_Info_Weight.png')} style={{ height: 30, width: 30 }} />
+              <Image source={require('../../../image/icon/Horse_Info_Weight.png')} style={{ height: 30, width: 30 }} />
             </View>
             <Text>Kg</Text>
           </View>

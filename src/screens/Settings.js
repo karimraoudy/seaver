@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import {Button } from 'react-native-elements';
 import {connect} from 'react-redux';
-import ModalBox from '../components/Modal';
+import ModalBox from '../components/settings/Modal';
 import {ResetPassword, CloseModal,startLogOut} from '../actions';
 
 class Settings extends Component {

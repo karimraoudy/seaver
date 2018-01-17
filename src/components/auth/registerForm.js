@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, Image, ImageBackground } from 'react-native';
 import { Button, FormInput, FormLabel } from 'react-native-elements';
 import { connect } from 'react-redux';
-import ModalBox from './Modal';
+import ModalBox from '../settings/Modal';
 import {
   EmailChanged, PasswordChanged, registerWithEmail,
   ConfirmPasswordChanged, PasswordDontMatch, startGoogleLogin, startFacebookLogin, CloseModal
-} from '../actions';
-import Spinner from './Spinner';
+} from '../../actions';
+import Spinner from '../settings/Spinner';
 class RegisterForm extends Component {
   onEmailChange = (email) => {
     this.props.EmailChanged(email)
@@ -50,7 +50,7 @@ class RegisterForm extends Component {
             flexDirection: 'row', borderBottomColor: 'grey',
             borderBottomWidth: 1, padding: 0
           }}>
-            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../image/icon/Mail.png')}
+            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../../image/icon/Mail.png')}
               style={{ width: 32, height: 32, padding: 0, margin: 0 }} /></View>
             <FormInput placeholder="EMAIL" value={this.props.auth.email}
               onChangeText={this.onEmailChange}
@@ -64,7 +64,7 @@ class RegisterForm extends Component {
             flexDirection: 'row', borderBottomColor: 'grey',
             borderBottomWidth: 1
           }}>
-            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../image/icon/Lock.png')}
+            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../../image/icon/Lock.png')}
               style={{ width: 32, height: 32, padding: 0, margin: 0 }} /></View>
             <FormInput placeholder="PASSWORD" value={this.props.auth.password}
               onChangeText={this.onPasswordChange} secureTextEntry
@@ -77,7 +77,7 @@ class RegisterForm extends Component {
             flexDirection: 'row', borderBottomColor: 'grey',
             borderBottomWidth: 1
           }}>
-            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../image/icon/Lock.png')}
+            <View style={{ justifyContent: 'flex-end', marginRight: 10 }}><ImageBackground source={require('../../../image/icon/Lock.png')}
               style={{ width: 32, height: 32, padding: 0, margin: 0 }} /></View>
             <FormInput placeholder="CONFIRM PASSWORD" value={this.props.auth.confirmPass}
               onChangeText={this.onConfirmPasswordChange} secureTextEntry

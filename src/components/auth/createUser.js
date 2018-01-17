@@ -5,9 +5,9 @@ import { Button, FormInput, FormLabel, ButtonGroup } from 'react-native-elements
 import {
   distanceSelected, burnCalSelected, weightSelected,
   FirstChanged, lastChanged, weightChanged, languageChanged, createProfil, setImage
-} from '../actions';
+} from '../../actions';
 import { ImagePicker } from 'expo';
-import { firebase } from '../firebase/firebase';
+import { firebase } from '../../firebase/firebase';
 import ModalDropdown from 'react-native-modal-dropdown';
 
 class CreateUser extends Component {
@@ -85,7 +85,7 @@ class CreateUser extends Component {
                 borderColor: '#fff', borderWidth: 1, width: 100, height: 100,
                 borderRadius: 50, justifyContent: 'center', alignItems: 'center'
               }}>
-              <Image source={this.props.user.avatar ? { uri: this.props.user.avatar } : require('../../image/icon/Avatar.png')}
+              <Image source={this.props.user.avatar ? { uri: this.props.user.avatar } : require('../../../image/icon/Avatar.png')}
                 style={{
                   borderColor: '#fff', borderWidth: 1, width: 100, height: 100,
                   borderRadius: 50
@@ -135,8 +135,8 @@ class CreateUser extends Component {
           }}>
             <Text style={[styles.labelStyle, { fontSize: 16 }]}>LANGUAGE</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Image source={this.props.auth.language === 'fr' ? require('../../image/icon/fr.png') :
-                require('../../image/icon/ang.png')}
+              <Image source={this.props.auth.language === 'fr' ? require('../../../image/icon/fr.png') :
+                require('../../../image/icon/ang.png')}
                 style={{
                   height: 36, width: 36, marginRight: 20, marginLeft: 27, borderRadius: 18
                   , borderWidth: 1, borderColor: '#fff'
@@ -149,7 +149,7 @@ class CreateUser extends Component {
                   height: 30, width: 30, borderRadius: 15,
                   borderWidth: 1, borderColor: '#969698', alignItems: 'center', justifyContent: 'center'
                 }}>
-                  <Image source={require('../../image/icon/Arrow_1.png')}
+                  <Image source={require('../../../image/icon/Arrow_1.png')}
                     style={{ height: 16, width: 16 }} />
                 </View>
               </ModalDropdown>
