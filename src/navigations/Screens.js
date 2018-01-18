@@ -7,7 +7,7 @@ import Horses from '../screens/Horses';
 import Notifications from '../screens/Notifications';
 import Report from '../screens/Report';
 import Settings from '../screens/Settings';
-import Training from '../screens/Training';
+// import Training from '../screens/Training';
 import Calendrier from '../screens/Calendrier';
 import ImageHeader from '../components/settings/Header';
 import HorseHeader from '../components/settings/horseHeader';
@@ -15,6 +15,10 @@ import EditUser from '../components/auth/editUser';
 import Test from '../screens/Test';
 import HorseEdit from '../components/horse/horseEdit';
 import HorseForm from '../components/horse/horseFrom';
+import Discipline from '../components/training/discipline';
+import Synchro from '../components/training/synchro';
+import Training from '../components/training/training';
+import EndTraining from '../components/training/finTraining';
 
 const HomeMenu = StackNavigator({
     homemenu: {
@@ -51,7 +55,61 @@ const HomeMenu = StackNavigator({
 
 });
 const TrainingMenu = StackNavigator({
-    trainingmenu: { screen: Training },
+    training:{
+        screen: TabNavigator({
+            discipline: { screen: Discipline }
+        }, {
+                tabBarPosition: 'bottom',
+                swipeEnabled: false, //android swipe default
+                tabBarOptions: {
+                    showIcon: true,
+                    showLabel: false,
+
+                    style: {
+                        backgroundColor: '#313133',
+                    },
+                    tabStyle: {
+                        justifyContent: 'flex-start'
+                        , alignItems: 'flex-start'
+                    },
+                    activeTintColor: '#9B9B9D',
+                    inactiveTintColor: '#9B9B9D'
+                }
+            })
+    },
+    synchro: {
+        screen: StackNavigator({
+            synchroPage: { screen: Synchro }
+        })
+    },
+    starttraining:{
+        screen: TabNavigator({
+            starttrain: { screen: Training }
+        }, {
+                tabBarPosition: 'bottom',
+                swipeEnabled: false, //android swipe default
+                tabBarOptions: {
+                    showIcon: true,
+                    showLabel: false,
+
+                    style: {
+                        backgroundColor: '#313133',
+                    },
+                    tabStyle: {
+                        justifyContent: 'flex-start'
+                        , alignItems: 'flex-start'
+                    },
+                    activeTintColor: '#9B9B9D',
+                    inactiveTintColor: '#9B9B9D'
+                }
+            })
+    },
+    endtraining:{
+        screen: StackNavigator({
+            endtrain: { screen: EndTraining }
+        })
+    },
+
 
 });
 const HorsesMenu = StackNavigator({
@@ -107,7 +165,7 @@ const HorsesMenu = StackNavigator({
                     inactiveTintColor: '#9B9B9D'
                 },
                 navigationOptions: {
-                    header: props => <HorseHeader {...props} title="MY HORSE" showHeaderRight />,
+                    header: props => <HorseHeader {...props} title="MY HORSE" showHeaderRight  />,
                 }
             })
     }

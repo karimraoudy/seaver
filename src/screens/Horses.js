@@ -17,7 +17,7 @@ class Horses extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
-      header: props => <ImageHeader {...props} title="MY HORSES" menu="hammer"
+      header: props => <ImageHeader {...props} title="MY HORSES" menu="hammer" color='black'
         selectHorse={() => params.onClickIn()} />,
       tabBarIcon: ({ tintColor }) => (
 
@@ -147,7 +147,7 @@ class Horses extends Component {
             </ScrollView>
           </View>
         </TouchableWithoutFeedback>
-        <Confirm visible={this.props.horse.showConfirm} onAccept={this.onAccept}
+        <Confirm visible={this.props.horse.showConfirm === true && this.props.horse.showConfirm} onAccept={this.onAccept}
           onDecline={this.onDecline} />
       </View>
 

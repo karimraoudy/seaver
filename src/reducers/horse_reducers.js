@@ -1,6 +1,6 @@
 INITIAL_STATE = {horsename:'',birth:'',breed:'', gender:'',familly:'',withers:'',girthFloor:'',heartGirth:'',
-    length:'',shoulderGirth:'',trained:'',isNervous:'',horseid:''
-    ,showConfirm:false,idTodelete:'',showSelectHorse:false, horseSelectedName:''}
+    length:'',shoulderGirth:'',trained:'',isNervous:'',horseid:'',
+    showConfirm:false,idTodelete:'',showSelectHorse:false, horseSelectedName:''}
 export default (state = INITIAL_STATE, action) =>{
     switch(action.type){ 
         case('BEGIN_HORSE_CREATION'):

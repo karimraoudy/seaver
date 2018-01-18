@@ -5,8 +5,11 @@ import ImageHeader from '../components/settings/Header';
 import _ from 'lodash';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
+import MiniModalBox from '../components/settings/miniModal';
 import SelectHorse from '../components/horse/selectHorse';
-import { userFetch, horsesFetch, showSelectHorse, hideSelectHorse, selectedHorse } from '../actions';
+import { userFetch, horsesFetch, showSelectHorse, hideSelectHorse, selectedHorse,
+   ShowActive,HideActive } from '../actions';
+
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -52,7 +55,6 @@ class Home extends Component {
     this.props.showSelectHorse();
   }
   onClickOut = () => {
-    console.log('out');
     this.props.hideSelectHorse();
   }
   componentDidMount() {
@@ -77,6 +79,13 @@ class Home extends Component {
   }
   renderRow = (horse) => {
     return <SelectHorse horse={horse} />;
+  }
+  beginTraining = ()=>{
+    this.props.ShowActive();
+  }
+  onClickModal = ()=>{
+    this.props.HideActive();
+    this.props.navigation.navigate('training');
   }
   render() {
     return (
@@ -125,7 +134,7 @@ class Home extends Component {
             {//partie add training et calendrier
             }
             <View style={styles.traingingContainer}>
-              <TouchableWithoutFeedback onPress={() => console.log('add id')}>
+              <TouchableWithoutFeedback onPress={this.beginTraining}>
                 <View style={{
                   flexDirection: 'row', alignItems: 'center', backgroundColor: '#313133', padding: 10
                   , borderWidth: 1, borderRadius: 25, justifyContent: 'space-around', width: 200
@@ -191,6 +200,13 @@ class Home extends Component {
               </TouchableWithoutFeedback>
 
             </View>
+            <MiniModalBox onClick={this.onClickModal} 
+            visible={this.props.setting.activeGpsBlue === true && this.props.setting.activeGpsBlue}>
+            
+             <Text style={{fontSize: 18, textAlign: 'center',color: '#fff'}}>ACTIVE GPS</Text>
+             <Text style={{fontSize: 18, textAlign: 'center',color: '#fff'}}>ACTIVE BLUETOOTH</Text>
+        
+             </MiniModalBox>
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -236,9 +252,9 @@ const mapStateToProps = state => {
   const horses = _.map(state.horses, (val, uid) => {
     return { ...val, uid };
   });
-  return { horses, horse: state.horse };
+  return { horses, horse: state.horse,setting: state.setting };
 };
 export default connect(mapStateToProps, {
   userFetch, horsesFetch, showSelectHorse
-  , hideSelectHorse, selectedHorse
+  , hideSelectHorse, selectedHorse, ShowActive,HideActive
 })(Home);

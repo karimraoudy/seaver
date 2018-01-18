@@ -13,6 +13,7 @@ const AuthoriserNavigation = DrawerNavigator ({
     friends:{screen: FriendsMenu},
     notif:{screen: NotificationsMenu},
     report:{screen: ReportMenu},
+    training:{screen: TrainingMenu}
 
 },{
     contentComponent: DrawerContent,
