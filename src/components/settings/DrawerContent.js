@@ -23,19 +23,26 @@ class DrawerContent extends Component {
                     </View>
                     <View >
                         <View style={{
-                            borderBottomColor: 'white',
+                            borderBottomColor: '#727274',
                             borderBottomWidth: 1,
                             margin: 22,
                             marginTop: 0,
                             marginBottom: 10,
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            justifyContent:'center'
                         }} >
-                            <Text style={{ color: '#727274', fontSize: 14, fontWeight: '100', marginBottom: 8 }}>NOW RIDDING</Text>
+                            <Text style={{ color: '#727274', fontSize: 14, fontWeight: '100', marginBottom: 8 }}>
+                                NOW RIDDING 
+                             </Text>
+                            <Text style={{ color: '#fff', fontSize: 14, fontWeight: '100', marginBottom: 8 }}>
+                                {this.props.user.horseSelectedName}
+                            </Text>
                         </View>
                         <DrawerItems {...this.props} items={this.props.items.filter((item) => item.routeName === 'home' ||
                             item.routeName === 'calendrier' || item.routeName === 'horses')} />
                         <View style={{
-                            borderBottomColor: 'white',
+                            borderBottomColor: '#727274',
                             borderBottomWidth: 1,
                             margin: 22,
                             marginBottom: 0

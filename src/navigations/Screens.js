@@ -12,7 +12,10 @@ import Calendrier from '../screens/Calendrier';
 import ImageHeader from '../components/settings/Header';
 import HorseHeader from '../components/settings/horseHeader';
 import EditUser from '../components/auth/editUser';
-import Test from '../screens/Test';
+import heartPage from '../screens/heartPage';
+import speedPage from '../screens/speedPage'; 
+import directionPage from '../screens/directionPage';
+import jumpPage from '../screens/jumpPage';
 import HorseEdit from '../components/horse/horseEdit';
 import HorseForm from '../components/horse/horseFrom';
 import Discipline from '../components/training/discipline';
@@ -24,10 +27,10 @@ const HomeMenu = StackNavigator({
     homemenu: {
         screen: TabNavigator({
             home: { screen: Home },
-            test1: { screen: Test },
-            test2: { screen: Test },
-            test3: { screen: Test },
-            test4: { screen: Test }
+            test1: { screen: heartPage },
+            test2: { screen: speedPage },
+            test3: { screen: directionPage },
+            test4: { screen: jumpPage }
 
         }, {
                 tabBarPosition: 'bottom',
@@ -174,6 +177,10 @@ const HorsesMenu = StackNavigator({
 const CalendrierMenu = StackNavigator({
     calendriermenu: { screen: Calendrier },
 
+}, {
+    navigationOptions: {
+        header: props => <ImageHeader {...props} title="CALENDAR" />,
+    }
 });
 const SettingsMenu = StackNavigator({
     setting: {

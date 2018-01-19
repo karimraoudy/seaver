@@ -7,8 +7,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import MiniModalBox from '../components/settings/miniModal';
 import SelectHorse from '../components/horse/selectHorse';
-import { userFetch, horsesFetch, showSelectHorse, hideSelectHorse, selectedHorse,
-   ShowActive,HideActive } from '../actions';
+import {
+  userFetch, horsesFetch, showSelectHorse, hideSelectHorse, selectedHorse,
+  ShowActive, HideActive
+} from '../actions';
 
 
 class Home extends Component {
@@ -25,7 +27,7 @@ class Home extends Component {
           alignItems: 'center'
         }}>
           <View style={{
-            borderColor: '#9B9B9D',
+            borderColor: '#727274',
             borderWidth: 2,
             borderRadius: 18,
             height: 36,
@@ -80,10 +82,10 @@ class Home extends Component {
   renderRow = (horse) => {
     return <SelectHorse horse={horse} />;
   }
-  beginTraining = ()=>{
+  beginTraining = () => {
     this.props.ShowActive();
   }
-  onClickModal = ()=>{
+  onClickModal = () => {
     this.props.HideActive();
     this.props.navigation.navigate('training');
   }
@@ -146,9 +148,11 @@ class Home extends Component {
 
                 </View>
               </TouchableWithoutFeedback>
-              <View style={{ borderColor: '#313133', borderWidth: 1, borderRadius: 25, alignSelf: 'center', padding: 15 }}>
-                <Text style={{ color: '#313133' }}>01-01-2018 ...</Text>
-              </View>
+              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('calendrier')}>
+                <View style={{ borderColor: '#313133', borderWidth: 1, borderRadius: 25, alignSelf: 'center', padding: 15 }}>
+                  <Text style={{ color: '#313133' }}>01-01-2018 ...</Text>
+                </View>
+              </TouchableWithoutFeedback>
             </View>
             <View style={{ margin: 20 }}><Text style={{ color: '#a0a0a2' }}>No last training</Text></View>
             <View>
@@ -200,13 +204,13 @@ class Home extends Component {
               </TouchableWithoutFeedback>
 
             </View>
-            <MiniModalBox onClick={this.onClickModal} 
-            visible={this.props.setting.activeGpsBlue === true && this.props.setting.activeGpsBlue}>
-            
-             <Text style={{fontSize: 18, textAlign: 'center',color: '#fff'}}>ACTIVE GPS</Text>
-             <Text style={{fontSize: 18, textAlign: 'center',color: '#fff'}}>ACTIVE BLUETOOTH</Text>
-        
-             </MiniModalBox>
+            <MiniModalBox onClick={this.onClickModal}
+              visible={this.props.setting.activeGpsBlue === true && this.props.setting.activeGpsBlue}>
+
+              <Text style={{ fontSize: 18, textAlign: 'center', color: '#fff' }}>ACTIVE GPS</Text>
+              <Text style={{ fontSize: 18, textAlign: 'center', color: '#fff' }}>ACTIVE BLUETOOTH</Text>
+
+            </MiniModalBox>
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -248,13 +252,12 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-
   const horses = _.map(state.horses, (val, uid) => {
     return { ...val, uid };
   });
-  return { horses, horse: state.horse,setting: state.setting };
+  return { horses, horse: state.horse, setting: state.setting };
 };
 export default connect(mapStateToProps, {
   userFetch, horsesFetch, showSelectHorse
-  , hideSelectHorse, selectedHorse, ShowActive,HideActive
+  , hideSelectHorse, selectedHorse, ShowActive, HideActive
 })(Home);

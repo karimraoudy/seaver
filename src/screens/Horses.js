@@ -28,7 +28,7 @@ class Horses extends Component {
           height: 36,
           width: 36,
           alignItems: 'center',
-          marginLeft: 40
+          marginLeft: 60
         }}><Image
             source={require('../../image/icon/Home_LightGrey.png')}
             style={{ tintColor: tintColor, height: 26, width: 26 }}
@@ -39,12 +39,10 @@ class Horses extends Component {
       },
       drawerLabel: 'HORSES',
       drawerIcon: ({ tintColor }) => {
-        return <Icon
-          name='ios-close-circle-outline'
-          color={'#727274'}
-          size={15}
-          type='simple-line-icon'
-        />;
+        return <Image
+        source={require('../../image/icon/iconhorsehead.png')}
+        style={{  height: 18, width: 18 }}
+      />;
       }
 
     }

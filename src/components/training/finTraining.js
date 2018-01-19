@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import ImageHeader from '../settings/trainingHeader';
 import {Button} from 'react-native-elements';
-export default class EndTraining extends Component {
+import RatingModal from '../settings/RatingModal';
+import {connect} from 'react-redux';
+import {HideRating,ShowRating} from '../../actions';
+ class EndTraining extends Component {
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
         return {
@@ -12,6 +15,10 @@ export default class EndTraining extends Component {
 
         }
     };
+    onClick=()=>{
+        this.props.HideRating();
+        // this.props.navigation.navigate('home')
+    }
     render() {
         return (
             <View style={{ marginTop: 60, backgroundColor: '#DEDEE0', height: '100%' }}>
@@ -72,9 +79,11 @@ export default class EndTraining extends Component {
                 <Button title='CALIBRATE' buttonStyle={{ width: 150, height:45 }} fontSize={22} borderRadius={25}
                     />
                 <Button title='STOP' buttonStyle={{ width: 150 , height:45}} fontSize={22} borderRadius={25}
-                onPress={()=>this.props.navigation.navigate('home')}
+                onPress={()=>this.props.ShowRating()}
                      />
                 </View>
+                <RatingModal visible={this.props.setting.showRating === true && this.props.setting.showRating} 
+                onClick={this.onClick} />
             </View>
         );
     }
@@ -107,3 +116,9 @@ const styles = {
         justifyContent: 'center', borderColor: '#828284', marginBottom: 6
     }
 };
+const mapStateToProps = (state) =>{
+    return {
+        setting:state.setting
+    }
+}
+export default connect(mapStateToProps,{HideRating,ShowRating})(EndTraining);

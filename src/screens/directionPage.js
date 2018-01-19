@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Text, View, ImageBackground,Image } from 'react-native';
 
-export default class Test extends Component {
+export default class directionPage extends Component {
   static navigationOptions= ({ navigation})=>({
     tabBarIcon:  ({ tintColor }) => (
       <View style={{borderColor:'#9B9B9D',
@@ -12,12 +12,12 @@ export default class Test extends Component {
       alignItems:'center',
       justifyContent:'center'
       }}><Image
-        source={require('../../image/icon/Heart_LightGrey.png')}
+        source={require('../../image/icon/Symmetry_LightGrey.png')}
         style={[styles.icon, {tintColor: tintColor}]}
       /></View>
     )
   })
-  render() {
+  render() { 
     return (
       <View >
         <Text>testscreen</Text>
