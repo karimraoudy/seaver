@@ -5,6 +5,9 @@ import {Button} from 'react-native-elements';
 import RatingModal from '../settings/RatingModal';
 import {connect} from 'react-redux';
 import {HideRating,ShowRating} from '../../actions';
+import moment from 'moment';
+const today = moment().format("DD-MM-YYYY");
+
  class EndTraining extends Component {
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
@@ -27,7 +30,7 @@ import {HideRating,ShowRating} from '../../actions';
                     <View style={{  width:'100%'
                     , alignItems: 'flex-end' , paddingRight:20}}>
                         <Text style={{borderColor: '#313133', borderWidth: 1, color: '#313133', padding: 15 ,borderRadius: 25}}>
-                        01-01-2018</Text>
+                        {today}</Text>
                     </View>
                 </View>
                 <View>
@@ -75,7 +78,8 @@ import {HideRating,ShowRating} from '../../actions';
                     </TouchableWithoutFeedback>
 
                 </View>
-                <View style={{flexDirection:'row' ,paddingRight:10,paddingLeft:10 ,marginTop:35}}>
+                <View style={{flexDirection:'row' ,paddingRight:10,paddingLeft:10 ,marginTop:35 ,
+                alignItems:'center', justifyContent:'center'}}>
                 <Button title='CALIBRATE' buttonStyle={{ width: 150, height:45 }} fontSize={22} borderRadius={25}
                     />
                 <Button title='STOP' buttonStyle={{ width: 150 , height:45}} fontSize={22} borderRadius={25}

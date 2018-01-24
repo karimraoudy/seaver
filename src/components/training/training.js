@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback,Platform } from 'react-native';
 import ImageHeader from '../settings/trainingHeader';
 import {Button} from 'react-native-elements';
+import moment from 'moment';
+const today = moment().format("DD-MM-YYYY"); 
+
 export default class Training extends Component {
     static navigationOptions = ({ navigation }) => {
         const { params = {} } = navigation.state;
@@ -16,8 +19,7 @@ export default class Training extends Component {
                     borderRadius: 18,
                     height: 36,
                     width: 36,
-                    alignItems: 'center',
-                    marginLeft: 60
+                    alignItems:'center', marginLeft:Platform.OS === 'ios' ?50:0
                 }}><Image
                         source={require('../../../image/icon/Home_LightGrey.png')}
                         style={{ tintColor: tintColor, height: 26, width: 26 }}
@@ -38,7 +40,7 @@ export default class Training extends Component {
                     <View style={{  width:'100%'
                     , alignItems: 'flex-end' , paddingRight:20}}>
                         <Text style={{borderColor: '#313133', borderWidth: 1, color: '#313133', padding: 15 ,borderRadius: 25}}>
-                        01-01-2018</Text>
+                        {today}</Text>
                     </View>
                 </View>
                 <View>
@@ -86,7 +88,8 @@ export default class Training extends Component {
                     </TouchableWithoutFeedback>
 
                 </View>
-                <View style={{flexDirection:'row' ,paddingRight:10,paddingLeft:10 ,marginTop:35}}>
+                <View style={{flexDirection:'row' ,paddingRight:10,paddingLeft:10 ,marginTop:35, 
+                alignItems:'center', justifyContent:'center'}}>
                 <Button title='CALIBRATE' buttonStyle={{ width: 150, height:45 }} fontSize={22} borderRadius={25}
                     />
                 <Button title='START' buttonStyle={{ width: 150 , height:45}} fontSize={22} borderRadius={25}

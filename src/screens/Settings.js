@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, View, Image, ScrollView, TouchableOpacity ,Platform} from 'react-native';
 import {Button } from 'react-native-elements';
 import {connect} from 'react-redux';
 import ModalBox from '../components/settings/Modal';
@@ -14,8 +14,7 @@ class Settings extends Component {
       borderRadius:18,
       height:36,
       width:36,
-      alignItems:'center',
-      marginLeft:40
+      alignItems:'center', marginLeft:Platform.OS === 'ios' ?50:0
       }}><Image
         source={require('../../image/icon/Home_LightGrey.png')}
         style={{tintColor: tintColor, height:26,width:26}}
@@ -57,8 +56,13 @@ onLogOut = () =>{
             </View>
           
           </View>
+          <View  style={{
+            borderColor: '#ACACAE', borderWidth: 1, width: 118, height: 118,
+            borderRadius: 59, justifyContent: 'center', alignItems: 'center',backgroundColor:'#ACACAE'
+          }}>
           <Image source={require('../../image/icon/Avatar.png')} 
-          style={{height:118, width:118, borderRadius:59, borderWidth:1, borderColor:'#ACACAE', backgroundColor:'#ACACAE'}}/>
+          style={{height:118, width:118, borderRadius:59, borderWidth:1, borderColor:'#ACACAE'}}/>
+          </View>
         </View>
           
         <View style={{marginBottom:30}}>

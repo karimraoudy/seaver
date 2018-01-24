@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, Image, TouchableWithoutFeedback, ListView } from 'react-native';
+import { Text, View, ImageBackground, Image, TouchableWithoutFeedback, ListView,Platform } from 'react-native';
 import { Button } from 'react-native-elements';
 import ImageHeader from '../components/settings/Header';
 import _ from 'lodash';
+import moment from 'moment';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import MiniModalBox from '../components/settings/miniModal';
@@ -11,7 +12,7 @@ import {
   userFetch, horsesFetch, showSelectHorse, hideSelectHorse, selectedHorse,
   ShowActive, HideActive
 } from '../actions';
-
+const today = moment().format("DD-MM-YYYY");
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -24,7 +25,7 @@ class Home extends Component {
           borderRightWidth: 1, borderRightColor: '#9B9B9D',
           height: 36,
           width: 48,
-          alignItems: 'center'
+          alignItems:'center',
         }}>
           <View style={{
             borderColor: '#727274',
@@ -35,8 +36,9 @@ class Home extends Component {
             alignItems: 'center'
           }}><Image
               source={require('../../image/icon/Home_LightGrey.png')}
-              style={[styles.icon, { tintColor: tintColor }]}
-            /></View></View>
+              style={[styles.icon, { tintColor: '#9B9B9D' }]}
+            /></View>
+            </View>
       ),
 
 
@@ -150,7 +152,7 @@ class Home extends Component {
               </TouchableWithoutFeedback>
               <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('calendrier')}>
                 <View style={{ borderColor: '#313133', borderWidth: 1, borderRadius: 25, alignSelf: 'center', padding: 15 }}>
-                  <Text style={{ color: '#313133' }}>01-01-2018 ...</Text>
+                  <Text style={{ color: '#313133' }}>{today}</Text>
                 </View>
               </TouchableWithoutFeedback>
             </View>

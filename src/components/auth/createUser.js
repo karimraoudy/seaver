@@ -25,6 +25,7 @@ class CreateUser extends Component {
   }
   weightChanged = (weight) => {
     this.props.weightChanged(weight)
+    
   }
   distanceSelected = (index) => {
     this.setState({ indexdist: index });

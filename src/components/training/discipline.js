@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Text, View , Image, ListView, ScrollView, TouchableWithoutFeedback} from 'react-native';
+import { Text, View , Image, ListView, ScrollView, TouchableWithoutFeedback, Platform} from 'react-native';
 import ImageHeader from '../settings/Header';
 import {Button} from 'react-native-elements';
 import {connect} from 'react-redux';
@@ -20,8 +20,7 @@ class Discipline extends Component {
               borderRadius: 18,
               height: 36,
               width: 36,
-              alignItems: 'center',
-              marginLeft: 40
+              alignItems:'center', marginLeft:Platform.OS === 'ios' ?50:0
             }}><Image
                 source={require('../../../image/icon/Home_LightGrey.png')}
                 style={{ tintColor: tintColor, height: 26, width: 26 }}

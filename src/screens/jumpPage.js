@@ -4,7 +4,7 @@ import { Text, View, ImageBackground,Image } from 'react-native';
 export default class jumpPage extends Component {
   static navigationOptions= ({ navigation})=>({
     tabBarIcon:  ({ tintColor }) => (
-      <View style={{borderColor:'#9B9B9D',
+      <View style={{borderColor: tintColor ==='#A67B7D' ? tintColor:'#9B9B9D',
       borderWidth:2,
       borderRadius:18,
       height:36,
@@ -20,9 +20,9 @@ export default class jumpPage extends Component {
   render() { 
     return (
       <View >
-        <Text>testscreen</Text>
-        <Text>testscreen</Text>
-        <Text>testscreen</Text>
+        <Text>jumpPage</Text>
+        <Text>jumpPage</Text>
+        <Text>jumpPage</Text>
       </View>
     );
   }

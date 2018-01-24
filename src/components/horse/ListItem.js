@@ -15,22 +15,33 @@ class ListItem extends Component {
     }
 
     render() {
-        const { horsename } = this.props.horse
+        const { horsename, uid } = this.props.horse;
+        
         return (
             <TouchableWithoutFeedback
                 onPress={this.onRowPress}
                 onLongPress={this.onLongPress}>
 
-                <View style={styles.containerStyle}>
+                <View style={uid === this.props.user.horseSelected?[styles.containerStyle,{backgroundColor:'#ACACAE'}]
+                :styles.containerStyle}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Image source={require('../../../image/icon/Avatar_Horse.png')}
-                            style={styles.avatarStyle} />
-                        <Text style={styles.titleStyle}>
+                        <View style={{
+                            borderColor: '#ACACAE', borderWidth: 1, width: 70, height: 70,
+                            borderRadius: 35, justifyContent: 'center', alignItems: 'center', marginRight: 20, backgroundColor:'#ACACAE'
+                        }}>
+                            <Image source={require('../../../image/icon/Avatar_Horse.png')}
+                                style={uid === this.props.user.horseSelected?[styles.avatarStyle,{borderColor:'#fff'}]
+                                :styles.avatarStyle} />
+                        </View>
+                        <Text style={uid === this.props.user.horseSelected?{fontSize: 21,color: '#fff'}:
+                        styles.titleStyle}>
                             {horsename}
                         </Text>
                     </View>
-                    <Image source={require('../../../image/icon/Horse_Grey3.png')}
-                        style={{ height: 70, width: 70 }} />
+                    <Image source={uid === this.props.user.horseSelected?
+                        require('../../../image/icon/Calibrate.png')
+                        :require('../../../image/icon/Horse_Grey3.png')}
+                        style={uid === this.props.user.horseSelected?{ height: 90, width: 70 }:{ height: 70, width: 70 }} />
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -41,8 +52,7 @@ const styles = {
         fontSize: 18,
         color: 'grey'
     }, avatarStyle: {
-        height: 70, width: 70, borderRadius: 35,
-        borderWidth: 1, borderColor: '#ACACAE', backgroundColor: '#ACACAE', marginRight: 20
+        height:70, width:70, borderRadius:35, borderWidth:1, borderColor:'#ACACAE'
     },
     containerStyle: {
         flexDirection: 'row',
@@ -52,11 +62,13 @@ const styles = {
         paddingTop: 10,
         paddingBottom: 10,
         borderTopColor: 'grey',
-        borderTopWidth: 1
+        borderTopWidth: 1,
+        height: 90
     }
 };
 mapStateToProps = (state) => {
     return {
+        user:state.user,
         nav: state.nav
     }
 };

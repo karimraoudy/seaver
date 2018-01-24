@@ -8,6 +8,7 @@ import {
   trainedChanged, isNervousChanged, horseCreate, updateHorse
 } from '../../actions';
 
+
 class HorseForm extends Component {
   state = {
     mare: this.props.horse.gender === 'MARE' ? true : false,
@@ -45,6 +46,21 @@ class HorseForm extends Component {
   onshoulderGirthChange = (shoulderGirth) => {
     this.props.shoulderGirthChanged(shoulderGirth)
   }
+  calculeWeight = (familly, length, heartGirth) => {
+    if (familly === 'PONY') {
+      const weightApp = ((heartGirth ? heartGirth : 0) * (heartGirth ? heartGirth : 0) * (length ? length : 0) / 11.87).toFixed(2);
+      return weightApp;
+    } else if (familly === 'HORSE') {
+      const weightApp = (Math.pow(heartGirth ? heartGirth : 0, 1.78) * Math.pow(length ? length : 0, 1.05) / 3011).toFixed(2);
+      return weightApp;
+    }
+    else {
+      const weightApp = 0;
+      return weightApp;
+
+    }
+
+  }
   onSubmit = () => {
     const { horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
       length, shoulderGirth, trained, isNervous, id } = this.props.horse;
@@ -64,7 +80,7 @@ class HorseForm extends Component {
 
   }
   render() {
-    const { horsename, birth, breed, withers, girthFloor, heartGirth, length, shoulderGirth } = this.props.horse;
+    const { horsename, birth, breed, withers, girthFloor, heartGirth, length, shoulderGirth, familly } = this.props.horse;
     return (
       <ScrollView style={{ marginTop: 80 }}>
 
@@ -175,187 +191,25 @@ class HorseForm extends Component {
           </View>
         </View>
 
-
-        <View style={{
-          borderBottomColor: '#BEC0C0', marginLeft: 35, marginRight: 35,
-          borderBottomWidth: 2, marginBottom: 20, marginTop: 20
-        }} />
-        {/*FORM 3*/}
-        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-          <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 45 }}>
-            <Text style={{ color: 'grey' }}>HORSE</Text>
-            <CheckBox
-              iconType='ionicon'
-              checkedIcon='ios-radio-button-on'
-              uncheckedIcon='ios-radio-button-off'
-              checked={this.state.horse}
-              onPress={() => {
-                this.setState({ horse: true, pony: false });
-                this.props.famillyChanged('HORSE');
-              }}
-              checkedColor={'grey'}
-              containerStyle={{
-                backgroundColor: 'transparent', borderColor: 'transparent',
-                width: 22, margin: 0, padding: 0
-              }}
-            />
-          </View>
-          <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ color: 'grey' }}>PONY</Text>
-            <CheckBox
-              iconType='ionicon'
-              checkedIcon='ios-radio-button-on'
-              uncheckedIcon='ios-radio-button-off'
-              checked={this.state.pony}
-              onPress={() => {
-                this.setState({ horse: false, pony: true });
-                this.props.famillyChanged('PONY');
-              }}
-              checkedColor={'grey'}
-              containerStyle={{
-                backgroundColor: 'transparent', borderColor: 'transparent',
-                width: 22, margin: 0, padding: 0
-              }}
-            />
-          </View>
-        </View>
-        <View style={{
-          borderBottomColor: '#BEC0C0', marginLeft: 35, marginRight: 35,
-          borderBottomWidth: 2, marginBottom: 20, marginTop: 20
-        }} />
-        {/*FORM 4*/}
-        <View style={[styles.containerStyle, { padding: 30, paddingRight: 10 }]}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-            <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
-            <Text style={styles.textStyle}>WITHERS HEIGHT</Text>
-            <FormInput placeholder='0CM'
-              value={withers}
-              onChangeText={this.onWithersChange}
-              keyboardType={'numeric'}
-              inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
-              containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-            <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
-            <Text style={styles.textStyle}>HEIGHT GIRTH-FLOOR</Text>
-            <FormInput placeholder='0cm'
-              value={girthFloor}
-              onChangeText={this.onGirthFloorChange}
-              keyboardType={'numeric'}
-              inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
-              containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-            <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
-            <Text style={styles.textStyle}>HEART GIRTH</Text>
-            <FormInput placeholder='0cm'
-              value={heartGirth}
-              onChangeText={this.onheartGirthChange}
-              keyboardType={'numeric'}
-              inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
-              containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-            <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
-            <Text style={styles.textStyle}>LENGTH</Text>
-            <FormInput placeholder='0cm'
-              value={length}
-              onChangeText={this.onLengthChange}
-              keyboardType={'numeric'}
-              inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
-              containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-            <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
-            <Text style={styles.textStyle}>SHOULDER-GIRTH LENGTH</Text>
-            <FormInput placeholder='0cm'
-              value={shoulderGirth}
-              onChangeText={this.onshoulderGirthChange}
-              keyboardType={'numeric'}
-              inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
-              containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
-          </View>
+        {this.props.horse.gender &&
           <View style={{
-            alignItems: 'center', justifyContent: 'space-around'
-            , backgroundColor: '#fff', marginTop: 20, marginRight: 20, height: 40, borderColor: '#fff', borderRadius: 20
-          }}>
-            <Text style={{ color: 'grey', fontSize: 12 }}>APPROXIMATIVE WEIGHT: kg </Text></View>
-        </View>
-        <View style={{
-          borderBottomColor: '#BEC0C0', marginLeft: 35, marginRight: 35,
-          borderBottomWidth: 2, marginBottom: 20, marginTop: 20
-        }} />
-        {/*FORM 5*/}
-        <View style={styles.containerStyle}>
-          <View style={{ justifyContent: 'center', alignItems: 'center', margin: 15 }}><Text style={{ color: '#fff' }}>HOW MUCH IS YOUR HORSE TRAINED?</Text></View>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', paddingLeft: 20, paddingRight: 20 }}>
-            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ color: 'grey' }}>FULLY</Text>
-              <CheckBox
-                iconType='ionicon'
-                checkedIcon='ios-radio-button-on'
-                uncheckedIcon='ios-radio-button-off'
-                checked={this.state.full}
-                onPress={() => {
-                  this.setState({ full: true, medium: false, nottrained: false });
-                  this.props.trainedChanged('FULLY');
-                }}
-                checkedColor={'grey'}
-                containerStyle={{
-                  backgroundColor: 'transparent', borderColor: 'transparent',
-                  width: 22, margin: 0, padding: 0
-                }}
-              />
-            </View>
-            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ color: 'grey' }}>MEDIUM</Text>
-              <CheckBox
-                iconType='ionicon'
-                checkedIcon='ios-radio-button-on'
-                uncheckedIcon='ios-radio-button-off'
-                checked={this.state.medium}
-                onPress={() => {
-                  this.setState({ full: false, medium: true, nottrained: false });
-                  this.props.trainedChanged('MEDIUM');
-                }}
-                checkedColor={'grey'}
-                containerStyle={{
-                  backgroundColor: 'transparent', borderColor: 'transparent',
-                  width: 22, margin: 0, padding: 0
-                }}
-              />
-            </View>
-            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ color: 'grey' }}>NOT TRAINED</Text>
-              <CheckBox
-                iconType='ionicon'
-                checkedIcon='ios-radio-button-on'
-                uncheckedIcon='ios-radio-button-off'
-                checked={this.state.nottrained}
-                onPress={() => {
-                  this.setState({ full: false, medium: false, nottrained: true });
-                  this.props.trainedChanged('NOT TRAINED');
-                }}
-                checkedColor={'grey'}
-                containerStyle={{
-                  backgroundColor: 'transparent', borderColor: 'transparent',
-                  width: 22, margin: 0, padding: 0
-                }}
-              />
-            </View>
-          </View>
-          <View style={{ justifyContent: 'center', alignItems: 'center', margin: 15 }}><Text style={{ color: '#fff' }}>IS YOUR HORSE NERVOUS?</Text></View>
+            borderBottomColor: '#BEC0C0', marginLeft: 35, marginRight: 35,
+            borderBottomWidth: 2, marginBottom: 20, marginTop: 20
+          }} />
+        }
+        {/*FORM 3*/}
+        {this.props.horse.gender &&
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 45 }}>
-              <Text style={{ color: 'grey' }}>YES</Text>
+              <Text style={{ color: 'grey' }}>HORSE</Text>
               <CheckBox
                 iconType='ionicon'
                 checkedIcon='ios-radio-button-on'
                 uncheckedIcon='ios-radio-button-off'
-                checked={this.state.nervous}
+                checked={this.state.horse}
                 onPress={() => {
-                  this.setState({ nervous: true, notnervous: false });
-                  this.props.isNervousChanged('YES');
+                  this.setState({ horse: true, pony: false });
+                  this.props.famillyChanged('HORSE');
                 }}
                 checkedColor={'grey'}
                 containerStyle={{
@@ -365,15 +219,15 @@ class HorseForm extends Component {
               />
             </View>
             <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={{ color: 'grey' }}>NO</Text>
+              <Text style={{ color: 'grey' }}>PONY</Text>
               <CheckBox
                 iconType='ionicon'
                 checkedIcon='ios-radio-button-on'
                 uncheckedIcon='ios-radio-button-off'
-                checked={this.state.notnervous}
+                checked={this.state.pony}
                 onPress={() => {
-                  this.setState({ nervous: false, notnervous: true });
-                  this.props.isNervousChanged('NO');
+                  this.setState({ horse: false, pony: true });
+                  this.props.famillyChanged('PONY');
                 }}
                 checkedColor={'grey'}
                 containerStyle={{
@@ -383,13 +237,190 @@ class HorseForm extends Component {
               />
             </View>
           </View>
-        </View>
-        <View style={{ alignItems: 'center' }}>
-          <Button title="DONE"
-            containerViewStyle={{ width: '60%' }}
-            borderRadius={20}
-            onPress={this.onSubmit} />
-        </View>
+        }
+        {this.props.horse.familly &&
+          <View style={{
+            borderBottomColor: '#BEC0C0', marginLeft: 35, marginRight: 35,
+            borderBottomWidth: 2, marginBottom: 20, marginTop: 20
+          }} />
+        }
+        {/*FORM 4*/}
+        {this.props.horse.familly &&
+          <View style={[styles.containerStyle, { padding: 30, paddingRight: 10 }]}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <Text style={styles.textStyle}>WITHERS HEIGHT</Text>
+              <FormInput placeholder='0CM'
+                value={withers}
+                onChangeText={this.onWithersChange}
+                keyboardType={'numeric'}
+                inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
+                containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <Text style={styles.textStyle}>HEIGHT GIRTH-FLOOR</Text>
+              <FormInput placeholder='0cm'
+                value={girthFloor}
+                onChangeText={this.onGirthFloorChange}
+                keyboardType={'numeric'}
+                inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
+                containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <Text style={styles.textStyle}>HEART GIRTH</Text>
+              <FormInput placeholder='0cm'
+                value={heartGirth}
+                onChangeText={this.onheartGirthChange}
+                keyboardType={'numeric'}
+                inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
+                containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <Text style={styles.textStyle}>LENGTH</Text>
+              <FormInput placeholder='0cm'
+                value={length}
+                onChangeText={this.onLengthChange}
+                keyboardType={'numeric'}
+                inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
+                containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <Text style={styles.textStyle}>SHOULDER-GIRTH LENGTH</Text>
+              <FormInput placeholder='0cm'
+                value={shoulderGirth}
+                onChangeText={this.onshoulderGirthChange}
+                keyboardType={'numeric'}
+                inputStyle={[styles.inputFormStyle, { color: 'black', fontSize: 13 }]} placeholderTextColor={'black'}
+                containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
+            </View>
+            <View style={{
+              alignItems: 'center', justifyContent: 'center', flexDirection: 'row'
+              , backgroundColor: '#fff', marginTop: 20, marginRight: 20, height: 40, borderColor: '#fff', borderRadius: 20
+            }}>
+              <Text style={{ color: 'grey', fontSize: 12 }}>APPROXIMATIVE WEIGHT: </Text>
+              <Text style={{ marginLeft: 5, marginRight: 2 }}>{this.calculeWeight(familly, heartGirth, length)}</Text>
+              <Text style={{ color: 'grey', fontSize: 12, textAlign: 'left' }}>kg</Text></View>
+          </View>
+        }
+        {this.props.horse.familly &&
+          <View style={{
+            borderBottomColor: '#BEC0C0', marginLeft: 35, marginRight: 35,
+            borderBottomWidth: 2, marginBottom: 20, marginTop: 20
+          }} />
+        }
+        {/*FORM 5*/}
+        {this.props.horse.familly &&
+          <View style={styles.containerStyle}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', margin: 15 }}><Text style={{ color: '#fff' }}>HOW MUCH IS YOUR HORSE TRAINED?</Text></View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', paddingLeft: 20, paddingRight: 20 }}>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'grey' }}>FULLY</Text>
+                <CheckBox
+                  iconType='ionicon'
+                  checkedIcon='ios-radio-button-on'
+                  uncheckedIcon='ios-radio-button-off'
+                  checked={this.state.full}
+                  onPress={() => {
+                    this.setState({ full: true, medium: false, nottrained: false });
+                    this.props.trainedChanged('FULLY');
+                  }}
+                  checkedColor={'grey'}
+                  containerStyle={{
+                    backgroundColor: 'transparent', borderColor: 'transparent',
+                    width: 22, margin: 0, padding: 0
+                  }}
+                />
+              </View>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'grey' }}>MEDIUM</Text>
+                <CheckBox
+                  iconType='ionicon'
+                  checkedIcon='ios-radio-button-on'
+                  uncheckedIcon='ios-radio-button-off'
+                  checked={this.state.medium}
+                  onPress={() => {
+                    this.setState({ full: false, medium: true, nottrained: false });
+                    this.props.trainedChanged('MEDIUM');
+                  }}
+                  checkedColor={'grey'}
+                  containerStyle={{
+                    backgroundColor: 'transparent', borderColor: 'transparent',
+                    width: 22, margin: 0, padding: 0
+                  }}
+                />
+              </View>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'grey' }}>NOT TRAINED</Text>
+                <CheckBox
+                  iconType='ionicon'
+                  checkedIcon='ios-radio-button-on'
+                  uncheckedIcon='ios-radio-button-off'
+                  checked={this.state.nottrained}
+                  onPress={() => {
+                    this.setState({ full: false, medium: false, nottrained: true });
+                    this.props.trainedChanged('NOT TRAINED');
+                  }}
+                  checkedColor={'grey'}
+                  containerStyle={{
+                    backgroundColor: 'transparent', borderColor: 'transparent',
+                    width: 22, margin: 0, padding: 0
+                  }}
+                />
+              </View>
+            </View>
+            <View style={{ justifyContent: 'center', alignItems: 'center', margin: 15 }}><Text style={{ color: '#fff' }}>IS YOUR HORSE NERVOUS?</Text></View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 45 }}>
+                <Text style={{ color: 'grey' }}>YES</Text>
+                <CheckBox
+                  iconType='ionicon'
+                  checkedIcon='ios-radio-button-on'
+                  uncheckedIcon='ios-radio-button-off'
+                  checked={this.state.nervous}
+                  onPress={() => {
+                    this.setState({ nervous: true, notnervous: false });
+                    this.props.isNervousChanged('YES');
+                  }}
+                  checkedColor={'grey'}
+                  containerStyle={{
+                    backgroundColor: 'transparent', borderColor: 'transparent',
+                    width: 22, margin: 0, padding: 0
+                  }}
+                />
+              </View>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'grey' }}>NO</Text>
+                <CheckBox
+                  iconType='ionicon'
+                  checkedIcon='ios-radio-button-on'
+                  uncheckedIcon='ios-radio-button-off'
+                  checked={this.state.notnervous}
+                  onPress={() => {
+                    this.setState({ nervous: false, notnervous: true });
+                    this.props.isNervousChanged('NO');
+                  }}
+                  checkedColor={'grey'}
+                  containerStyle={{
+                    backgroundColor: 'transparent', borderColor: 'transparent',
+                    width: 22, margin: 0, padding: 0
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+        }
+        {this.props.horse.familly &&
+          <View style={{ alignItems: 'center' }}>
+            <Button title="DONE"
+              containerViewStyle={{ width: '60%' }}
+              borderRadius={20}
+              onPress={this.onSubmit} />
+          </View>
+        }
       </ScrollView>
     );
   }

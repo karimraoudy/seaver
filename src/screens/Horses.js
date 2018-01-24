@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import ListItem from '../components/horse/ListItem';
 import Confirm from '../components/settings/Confirm';
-import { Text, View, TouchableWithoutFeedback, ListView, Image, ScrollView } from 'react-native';
+import { Text, View, TouchableWithoutFeedback, ListView, Image, ScrollView,Platform} from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import SelectHorse from '../components/horse/selectHorse';
@@ -18,17 +18,16 @@ class Horses extends Component {
     const { params = {} } = navigation.state;
     return {
       header: props => <ImageHeader {...props} title="MY HORSES" menu="hammer" color='black'
-        selectHorse={() => params.onClickIn()} />,
+       selectHorse={() => params.onClickIn()} />,
       tabBarIcon: ({ tintColor }) => (
 
-        <View style={{
+        <View style={{ 
           borderColor: '#9B9B9D',
           borderWidth: 2,
           borderRadius: 18,
           height: 36,
           width: 36,
-          alignItems: 'center',
-          marginLeft: 60
+          alignItems:'center', marginLeft:Platform.OS === 'ios' ?50:0
         }}><Image
             source={require('../../image/icon/Home_LightGrey.png')}
             style={{ tintColor: tintColor, height: 26, width: 26 }}
@@ -93,7 +92,7 @@ class Horses extends Component {
                 enableEmptySections
                 dataSource={this.dataSource}
                 renderRow={this.SelectRenderRow}
-              />
+              /> 
               <TouchableWithoutFeedback onPress={() => {
                 this.onClickOut();
                 this.props.navigation.navigate('registerhorse')}} >
@@ -120,7 +119,7 @@ class Horses extends Component {
         }
         <TouchableWithoutFeedback onPress={this.onClickOut}>
           <View style={{ position: 'absolute', top: 0, zIndex: 10, flex: 1,width: '100%', height: '100%'  }}>
-          <ScrollView >
+          <ScrollView style={{paddingTop:50}}>
 
             <ListView 
               enableEmptySections
@@ -178,11 +177,11 @@ const styles = {
   miniCrossStyle: {
     height: 30, width: 30, borderRadius: 15, marginRight: 15,
     borderWidth: 1, borderColor: '#fff'
-    , justifyContent: 'center', alignItems: 'center', marginTop: 20
+    , justifyContent: 'center', alignItems: 'center'
   },
   miniContainerCross: {
     marginLeft: 5,
-    flexDirection: 'row', alignItems: 'center',
+    flexDirection: 'row', alignItems: 'center',marginTop: 20
   }
 }
 export default connect(mapStateToProps, {

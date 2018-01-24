@@ -27,10 +27,10 @@ const HomeMenu = StackNavigator({
     homemenu: {
         screen: TabNavigator({
             home: { screen: Home },
-            test1: { screen: heartPage },
-            test2: { screen: speedPage },
-            test3: { screen: directionPage },
-            test4: { screen: jumpPage }
+            heartpage: { screen: heartPage },
+            speedpage: { screen: speedPage },
+            directionpage: { screen: directionPage },
+            jumppage: { screen: jumpPage }
 
         }, {
                 tabBarPosition: 'bottom',
@@ -40,15 +40,16 @@ const HomeMenu = StackNavigator({
                     labelStyle: { fontSize: 12 },
                     showIcon: true,
                     showLabel: false,
-                    iconStyle: {
-                        width: 30,
-                        height: 30
-
-                    },
                     style: {
-                        backgroundColor: '#313133'
+                        backgroundColor: '#313133',
                     },
-                    activeTintColor: '#9B9B9D',
+                    indicatorStyle:{backgroundColor:'transparent'},
+                    iconStyle:{width:50, height:40},
+                    tabStyle: {
+                        justifyContent: 'space-around'
+                        , alignItems: 'center'
+                    },
+                    activeTintColor: '#A67B7D',
                     inactiveTintColor: '#9B9B9D'
 
                 }
@@ -71,7 +72,10 @@ const TrainingMenu = StackNavigator({
                     style: {
                         backgroundColor: '#313133',
                     },
+                    indicatorStyle:{backgroundColor:'transparent'},
+                    iconStyle:{width:50, height:40},
                     tabStyle: {
+                        
                         justifyContent: 'flex-start'
                         , alignItems: 'flex-start'
                     },
@@ -98,7 +102,10 @@ const TrainingMenu = StackNavigator({
                     style: {
                         backgroundColor: '#313133',
                     },
+                    indicatorStyle:{backgroundColor:'transparent'},
+                    iconStyle:{width:50, height:40},
                     tabStyle: {
+                        
                         justifyContent: 'flex-start'
                         , alignItems: 'flex-start'
                     },
@@ -129,7 +136,10 @@ const HorsesMenu = StackNavigator({
                     style: {
                         backgroundColor: '#313133',
                     },
+                    indicatorStyle:{backgroundColor:'transparent'},
+                    iconStyle:{width:50, height:40},
                     tabStyle: {
+                        
                         justifyContent: 'flex-start'
                         , alignItems: 'flex-start'
                     },
@@ -160,7 +170,10 @@ const HorsesMenu = StackNavigator({
                     style: {
                         backgroundColor: '#313133',
                     },
+                    indicatorStyle:{backgroundColor:'transparent'},
+                    iconStyle:{width:50, height:40},
                     tabStyle: {
+                        
                         justifyContent: 'flex-start'
                         , alignItems: 'flex-start'
                     },
@@ -196,7 +209,10 @@ const SettingsMenu = StackNavigator({
                     style: {
                         backgroundColor: '#313133',
                     },
+                    indicatorStyle:{backgroundColor:'transparent'},
+                    iconStyle:{width:50, height:40},
                     tabStyle: {
+                        
                         justifyContent: 'flex-start'
                         , alignItems: 'flex-start'
                     },

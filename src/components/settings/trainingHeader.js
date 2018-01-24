@@ -13,7 +13,7 @@ const ImageHeader = props => (
     source={require('../../../image/hdserver2.jpg')}
     resizeMode={'stretch'} >
     
-    
+    <View style={{flexDirection:'row', justifyContent:'space-between', width:'100%'}}>
       <Text style={{
         backgroundColor: 'transparent', color:props.color?props.color: '#6E6E6E', alignSelf: 'center',
         fontSize: 16, marginLeft: 100, fontWeight: 'bold'
@@ -22,11 +22,12 @@ const ImageHeader = props => (
      
   
       
-        <View style={{ flexDirection: 'row', alignItems: 'center', width: '40%', justifyContent: 'flex-end' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', width: '40%', justifyContent: 'flex-end', marginRight:30}}>
           <Text style={{ backgroundColor: 'transparent', color: '#fff' , fontSize:16}}>
             {
               props.horse.horseSelectedName ?props.horse.horseSelectedName:'' 
             }</Text>
+        </View>
         </View>
      
   </ImageBackground>

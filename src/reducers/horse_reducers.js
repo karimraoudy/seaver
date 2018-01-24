@@ -1,5 +1,7 @@
-INITIAL_STATE = {horsename:'',birth:'',breed:'', gender:'',familly:'',withers:'',girthFloor:'',heartGirth:'',
-    length:'',shoulderGirth:'',trained:'',isNervous:'',horseid:'',
+import moment from 'moment'
+const yearNow = moment().format('YYYY');
+INITIAL_STATE = {horsename:'',birth:'',breed:'', gender:'',familly:'',withers:0,girthFloor:0,heartGirth:0,
+    length:0,shoulderGirth:0,trained:'',isNervous:'',horseid:'',
     showConfirm:false,idTodelete:'',showSelectHorse:false, horseSelectedName:''}
 export default (state = INITIAL_STATE, action) =>{
     switch(action.type){ 
