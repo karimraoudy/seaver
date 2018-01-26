@@ -9,18 +9,17 @@ import { connect } from 'react-redux';
 import MiniModalBox from '../components/settings/miniModal';
 import SelectHorse from '../components/horse/selectHorse';
 import {
-  userFetch, horsesFetch, showSelectHorse, hideSelectHorse, selectedHorse,
+  userFetch, horsesFetch, showSelectHorse, hideSelectHorse, selectedHorse,beginHorseCreation,
   ShowActive, HideActive
 } from '../actions';
 const today = moment().format("DD-MM-YYYY");
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
     return {
       header: props => <ImageHeader {...props} title="S E A V E R" menu="hammer"
-        selectHorse={() => params.onClickIn()} />,
-      tabBarIcon: ({ tintColor }) => (
+         />,
+      tabBarIcon: ({ tintColor }) => ( 
         <View style={{
           borderRightWidth: 1, borderRightColor: '#9B9B9D',
           height: 36,
@@ -55,14 +54,9 @@ class Home extends Component {
 
     }
   };
-  onClickIn = () => {
-    this.props.showSelectHorse();
-  }
+ 
   onClickOut = () => {
     this.props.hideSelectHorse();
-  }
-  componentDidMount() {
-    this.props.navigation.setParams({ onClickIn: this.onClickIn })
   }
   componentWillMount() {
     this.props.userFetch();
@@ -105,6 +99,7 @@ class Home extends Component {
               />
               <TouchableWithoutFeedback onPress={() => {
                 this.onClickOut();
+                this.props.beginHorseCreation();
                 this.props.navigation.navigate('registerhorse')
               }
               } >
@@ -260,6 +255,6 @@ const mapStateToProps = state => {
   return { horses, horse: state.horse, setting: state.setting };
 };
 export default connect(mapStateToProps, {
-  userFetch, horsesFetch, showSelectHorse
-  , hideSelectHorse, selectedHorse, ShowActive, HideActive
+  userFetch, horsesFetch
+  , hideSelectHorse, selectedHorse, ShowActive, HideActive,beginHorseCreation
 })(Home);

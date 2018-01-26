@@ -71,6 +71,12 @@ export const isNervousChanged = (isNervous) => {
         isNervous
     }
 };
+export const isPregnantChanged = (isPregnant) => {
+    return {
+        type: 'IS_PREGNANT',
+        isPregnant
+    }
+};
 export const showHorse = (id) => {
     return {
         type: 'HORSE_TO_SHOW',
@@ -78,14 +84,14 @@ export const showHorse = (id) => {
     }
 };
 export const horseCreate = ({ horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
-    length, shoulderGirth, trained, isNervous }) => {
+    length, shoulderGirth, trained, isNervous,isPregnant }) => {
     const { currentUser } = firebase.auth();
     return (dispatch) => {
         firebase.database()
             .ref(`/users/${currentUser.uid}/horses`)
             .push({
                 horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
-                length, shoulderGirth, trained, isNervous
+                length, shoulderGirth, trained, isNervous, isPregnant
             }).then((e) => {
 
                 dispatch({
@@ -113,14 +119,14 @@ export const horseCreatedFetch = ({ id }) => {
     };
 };
 export const updateHorse = ({ horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
-    length, shoulderGirth, trained, isNervous, id }) => {
+    length, shoulderGirth, trained, isNervous, id, isPregnant }) => {
     const { currentUser } = firebase.auth();
     return async (dispatch) => {
         await firebase.database()
             .ref(`/users/${currentUser.uid}/horses/${id}`).update({
                 horsename, birth, breed
                 , gender, familly, withers, girthFloor, heartGirth,
-                length, shoulderGirth, trained, isNervous
+                length, shoulderGirth, trained, isNervous, isPregnant
             })
         dispatch({ type: 'HORSE_UPDATED' });
     }

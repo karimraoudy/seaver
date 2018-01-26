@@ -19,6 +19,8 @@ export default (state = INITIAL_STATE, action) =>{
         return {...state, weight: action.weight };
         case 'LANGUAGE_CHANGED' :
         return {...state, language: action.language };
+        case('HORSE_SELECTED_NAME'):
+        return {...state,horseSelectedName:action.payload};
         case('BEGIN_LOGOUT'):
         return INITIAL_STATE;
         default:

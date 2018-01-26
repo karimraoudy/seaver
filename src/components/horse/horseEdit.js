@@ -3,7 +3,9 @@ import { Text, View, ScrollView, Image, TouchableWithoutFeedback, Platform } fro
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { horseCreatedFetch } from '../../actions';
+import moment from 'moment';
 
+const thisYear = moment().format("YYYY");
 class HorseEdit extends Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarIcon: ({ tintColor }) => (
@@ -35,10 +37,10 @@ class HorseEdit extends Component {
   }
   calculeWeight = (familly, length, heartGirth) => {
     if (familly === 'PONY') {
-      const weightApp = ((heartGirth ? heartGirth : 0) * (heartGirth ? heartGirth : 0) * (length ? length : 0) / 11.87).toFixed(2);
+      const weightApp = ((heartGirth ? heartGirth : 0) * (heartGirth ? heartGirth : 0) * (length ? length : 0) / 11.87).toFixed(0);
       return weightApp;
     } else if (familly === 'HORSE') {
-      const weightApp = (Math.pow(heartGirth ? heartGirth : 0, 1.78) * Math.pow(length ? length : 0, 1.05) / 3011).toFixed(2);
+      const weightApp = (Math.pow(heartGirth ? heartGirth : 0, 1.78) * Math.pow(length ? length : 0, 1.05) / 3011).toFixed(0);
       return weightApp;
     }
     else {
@@ -50,7 +52,7 @@ class HorseEdit extends Component {
   }
   render() {
     const { horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
-      length, shoulderGirth, trained, isNervous, } = this.props.horse;
+      length, shoulderGirth, trained, isNervous, isPregnant} = this.props.horse;
     return (
       <ScrollView style={{ marginTop: 60 }}>
         <View style={styles.firstContainer}>
@@ -64,6 +66,8 @@ class HorseEdit extends Component {
             }]} >
               <Text style={{ color: 'grey', fontSize: 15 }}
               >{gender}</Text>
+              {gender === 'MARE' && <Text style={{ color: 'grey', fontSize: 12, paddingLeft: 15 }}
+              >{isPregnant === 'YES' ?'Pregnant': 'Not Pregnant'}</Text>}
             </View>
 
           </View>
@@ -89,22 +93,22 @@ class HorseEdit extends Component {
             <View style={styles.circleStyle}>
               <Image source={require('../../../image/icon/Cake.png')} style={{ height: 30, width: 30 }} />
             </View>
-            <Text>{birth}</Text>
-            <Text>years old</Text>
+            <Text style={styles.horseDetailStyle}>{thisYear-birth}</Text>
+            <Text style={[styles.textStyle,{fontSize:11}]}>years old</Text>
           </View>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
             <View style={styles.circleStyle}>
               <Image source={require('../../../image/icon/Horse_Info_Height.png')} style={{ height: 60, width: 60 }} />
             </View>
-            <Text>{withers}</Text>
-            <Text>cm</Text>
+            <Text style={styles.horseDetailStyle}>{withers}</Text>
+            <Text style={[styles.textStyle,{fontSize:11}]}>cm</Text>
           </View>
           <View style={{ flexDirection: 'column', alignItems: 'center' }}>
             <View style={styles.circleStyle}>
               <Image source={require('../../../image/icon/Horse_Info_Weight.png')} style={{ height: 30, width: 30 }} />
             </View>
-            <Text>{this.calculeWeight(familly, heartGirth, length)}</Text>
-            <Text>Kg</Text>
+            <Text style={styles.horseDetailStyle}>{this.calculeWeight(familly, heartGirth, length)}</Text>
+            <Text style={[styles.textStyle,{fontSize:11}]}>Kg</Text>
           </View>
         </View>
         <View>
@@ -157,7 +161,6 @@ class HorseEdit extends Component {
   }
 }
 const mapStateToProps = (state) => {
-
   return {
     horse: state.horse
   }
@@ -194,6 +197,13 @@ const styles = {
   iconTraining: {
     width: 60, height: 60, borderWidth: 2, borderRadius: 30, alignItems: 'center',
     justifyContent: 'center', borderColor: '#828284', marginBottom: 6
+  },
+  horseDetailStyle:{
+    color:'grey',
+    fontSize:18,
+    marginTop:10,
+    marginBottom:0,
+    paddingBottom:0
   }
 }
 export default connect(mapStateToProps, { horseCreatedFetch })(HorseEdit);

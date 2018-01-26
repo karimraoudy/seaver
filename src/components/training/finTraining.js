@@ -20,7 +20,7 @@ const today = moment().format("DD-MM-YYYY");
     };
     onClick=()=>{
         this.props.HideRating();
-        // this.props.navigation.navigate('home')
+        this.props.navigation.navigate('home')
     }
     render() {
         return (

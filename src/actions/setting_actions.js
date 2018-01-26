@@ -10,3 +10,9 @@ export const ShowRating = () => ({
 export const HideRating= () => ({
     type: 'HIDE_RATING'
 });
+export const ShowUnit = () => ({
+    type: 'SHOW_UNIT'
+});
+export const HideUnit= () => ({
+    type: 'HIDE_UNIT'
+});

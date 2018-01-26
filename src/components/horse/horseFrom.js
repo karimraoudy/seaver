@@ -5,12 +5,16 @@ import { connect } from 'react-redux';
 import {
   nameChanged, yearChanged, breedChanged, genderChanged, famillyChanged,
   withersChanged, girthFloorChanged, heartGirthChanged, lengthChanged, shoulderGirthChanged,
-  trainedChanged, isNervousChanged, horseCreate, updateHorse
+  trainedChanged, isNervousChanged, horseCreate, updateHorse, ShowUnit, HideUnit, isPregnantChanged
 } from '../../actions';
+import UnitsModal from '../settings/unitsModal';
 
 
 class HorseForm extends Component {
   state = {
+    unitImage:'1',
+    pregnant:false,
+    notPregnant:false,
     mare: this.props.horse.gender === 'MARE' ? true : false,
     stallion: this.props.horse.gender === 'STALLION' ? true : false,
     gelding: this.props.horse.gender === 'GELDING' ? true : false,
@@ -61,19 +65,26 @@ class HorseForm extends Component {
     }
 
   }
+  closeUnit = ()=>{
+    this.props.HideUnit();
+  }
+  SetunitImage = (unit)=>{
+    this.setState({unitImage:unit })
+    this.props.ShowUnit();
+  }
   onSubmit = () => {
     const { horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
-      length, shoulderGirth, trained, isNervous, id } = this.props.horse;
+      length, shoulderGirth, trained, isNervous, id, isPregnant } = this.props.horse;
     if (id) {
       this.props.updateHorse({
         horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
-        length, shoulderGirth, trained, isNervous, id
+        length, shoulderGirth, trained, isNervous, id,isPregnant
       });
       this.props.navigation.navigate('horseedit');
     } else {
       this.props.horseCreate({
         horsename, birth, breed, gender, familly, withers, girthFloor, heartGirth,
-        length, shoulderGirth, trained, isNervous
+        length, shoulderGirth, trained, isNervous,isPregnant
       });
       this.props.navigation.navigate('horseedit');
     }
@@ -190,7 +201,49 @@ class HorseForm extends Component {
             />
           </View>
         </View>
-
+        {this.props.horse.gender === 'MARE' &&
+        <View style={styles.containerStyle}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', margin: 15 }}><Text style={{ color: '#fff' }}>IS YOUR MARE PREGNANT?</Text></View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 45 }}>
+                <Text style={{ color: 'grey' }}>YES</Text>
+                <CheckBox
+                  iconType='ionicon'
+                  checkedIcon='ios-radio-button-on'
+                  uncheckedIcon='ios-radio-button-off'
+                  checked={this.state.pregnant}
+                  onPress={() => {
+                    this.setState({ pregnant: true, notPregnant: false });
+                    this.props.isPregnantChanged('YES');
+                  }}
+                  checkedColor={'grey'}
+                  containerStyle={{
+                    backgroundColor: 'transparent', borderColor: 'transparent',
+                    width: 22, margin: 0, padding: 0
+                  }}
+                />
+              </View>
+              <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: 'grey' }}>NO</Text>
+                <CheckBox
+                  iconType='ionicon'
+                  checkedIcon='ios-radio-button-on'
+                  uncheckedIcon='ios-radio-button-off'
+                  checked={this.state.notPregnant}
+                  onPress={() => {
+                    this.setState({ pregnant: false, notPregnant: true });
+                    this.props.isPregnantChanged('NO');
+                  }}
+                  checkedColor={'grey'}
+                  containerStyle={{
+                    backgroundColor: 'transparent', borderColor: 'transparent',
+                    width: 22, margin: 0, padding: 0
+                  }}
+                />
+              </View>
+            </View>
+        </View>
+                }
         {this.props.horse.gender &&
           <View style={{
             borderBottomColor: '#BEC0C0', marginLeft: 35, marginRight: 35,
@@ -248,7 +301,9 @@ class HorseForm extends Component {
         {this.props.horse.familly &&
           <View style={[styles.containerStyle, { padding: 30, paddingRight: 10 }]}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' 
+                onPress={()=>{this.SetunitImage('1')}}
+              /></TouchableOpacity>
               <Text style={styles.textStyle}>WITHERS HEIGHT</Text>
               <FormInput placeholder='0CM'
                 value={withers}
@@ -258,7 +313,9 @@ class HorseForm extends Component {
                 containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' 
+              onPress={()=>{this.SetunitImage('2')}}
+              /></TouchableOpacity>
               <Text style={styles.textStyle}>HEIGHT GIRTH-FLOOR</Text>
               <FormInput placeholder='0cm'
                 value={girthFloor}
@@ -268,7 +325,9 @@ class HorseForm extends Component {
                 containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' 
+              onPress={()=>{this.SetunitImage('3')}} 
+              /></TouchableOpacity>
               <Text style={styles.textStyle}>HEART GIRTH</Text>
               <FormInput placeholder='0cm'
                 value={heartGirth}
@@ -278,7 +337,9 @@ class HorseForm extends Component {
                 containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' 
+              onPress={()=>{this.SetunitImage('4')}}
+              /></TouchableOpacity>
               <Text style={styles.textStyle}>LENGTH</Text>
               <FormInput placeholder='0cm'
                 value={length}
@@ -288,7 +349,9 @@ class HorseForm extends Component {
                 containerStyle={[styles.containerFormStyle, { width: 50, marginBottom: 10 }]} />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' /></TouchableOpacity>
+              <TouchableOpacity style={{ marginRight: 30 }}><Icon type='octicon' name="question" color='grey' 
+              onPress={()=>{this.SetunitImage('5')}}
+              /></TouchableOpacity>
               <Text style={styles.textStyle}>SHOULDER-GIRTH LENGTH</Text>
               <FormInput placeholder='0cm'
                 value={shoulderGirth}
@@ -421,6 +484,8 @@ class HorseForm extends Component {
               onPress={this.onSubmit} />
           </View>
         }
+        <UnitsModal visible={this.props.setting.showUnitsImage === true ?true:false} onClick={this.closeUnit} familly={familly}
+        unitImage={this.state.unitImage}/>
       </ScrollView>
     );
   }
@@ -454,11 +519,12 @@ const styles = {
 };
 const mapStateToProps = (state) => {
   return {
+    setting:state.setting,
     horse: state.horse
   }
 }
 export default connect(mapStateToProps, {
   nameChanged, yearChanged, breedChanged, genderChanged, famillyChanged,
   withersChanged, girthFloorChanged, heartGirthChanged, lengthChanged, shoulderGirthChanged,
-  trainedChanged, isNervousChanged, horseCreate, updateHorse
+  trainedChanged, isNervousChanged, horseCreate, updateHorse, HideUnit,ShowUnit,isPregnantChanged
 })(HorseForm);

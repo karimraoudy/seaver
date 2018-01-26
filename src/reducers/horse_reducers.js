@@ -1,7 +1,7 @@
 import moment from 'moment'
 const yearNow = moment().format('YYYY');
 INITIAL_STATE = {horsename:'',birth:'',breed:'', gender:'',familly:'',withers:0,girthFloor:0,heartGirth:0,
-    length:0,shoulderGirth:0,trained:'',isNervous:'',horseid:'',
+    length:0,shoulderGirth:0,trained:'',isNervous:'',horseid:'',isPregnant:'',
     showConfirm:false,idTodelete:'',showSelectHorse:false, horseSelectedName:''}
 export default (state = INITIAL_STATE, action) =>{
     switch(action.type){ 
@@ -31,6 +31,8 @@ export default (state = INITIAL_STATE, action) =>{
         return {...state,trained: action.trained};
         case('IS_NERVOUS_CHANGED'):
         return {...state,isNervous: action.isNervous};
+        case('IS_PREGNANT'):
+        return {...state,isPregnant: action.isPregnant};
         case('HORSE_CREATED'):
         return {...INITIAL_STATE, horseid:action.id};
         case('HORSE_TO_SHOW'):
@@ -55,7 +57,7 @@ export default (state = INITIAL_STATE, action) =>{
             breed:action.payload.breed, gender:action.payload.gender,familly:action.payload.familly,
             withers:action.payload.withers,girthFloor:action.payload.girthFloor,heartGirth:action.payload.heartGirth,
         length:action.payload.length,shoulderGirth:action.payload.shoulderGirth,trained:action.payload.trained,
-        isNervous:action.payload.isNervous ,horseid:''};
+        isNervous:action.payload.isNervous ,horseid:'', isPregnant:action.payload.isPregnant};
         default:
         return state;
     }

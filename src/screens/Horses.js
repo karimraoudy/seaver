@@ -8,17 +8,16 @@ import { connect } from 'react-redux';
 import SelectHorse from '../components/horse/selectHorse';
 import {
   beginHorseCreation, horsesFetch, showHorse, hideConfirm, horseDelete,
-  showSelectHorse, hideSelectHorse
+   hideSelectHorse
 } from '../actions';
 import ImageHeader from '../components/settings/Header';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class Horses extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
     return {
       header: props => <ImageHeader {...props} title="MY HORSES" menu="hammer" color='black'
-       selectHorse={() => params.onClickIn()} />,
+     />,
       tabBarIcon: ({ tintColor }) => (
 
         <View style={{ 
@@ -46,14 +45,8 @@ class Horses extends Component {
 
     }
   };
-  onClickIn = () => {
-    this.props.showSelectHorse();
-  }
   onClickOut = () => {
     this.props.hideSelectHorse();
-  }
-  componentDidMount() {
-    this.props.navigation.setParams({ onClickIn: this.onClickIn })
   }
   componentWillMount() {
     this.props.horsesFetch();
@@ -95,6 +88,7 @@ class Horses extends Component {
               /> 
               <TouchableWithoutFeedback onPress={() => {
                 this.onClickOut();
+                this.props.beginHorseCreation();
                 this.props.navigation.navigate('registerhorse')}} >
                 <View style={styles.miniContainerCross}>
                   <View style={styles.miniCrossStyle}>
@@ -186,5 +180,5 @@ const styles = {
 }
 export default connect(mapStateToProps, {
   beginHorseCreation, horsesFetch, hideConfirm,
-  horseDelete, showSelectHorse, hideSelectHorse
+  horseDelete, hideSelectHorse
 })(Horses);
